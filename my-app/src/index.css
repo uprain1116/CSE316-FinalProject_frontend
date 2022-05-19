@@ -1,13 +1,94 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Global CSS Variables: https://www.w3schools.com/css/css3_variables.asp */
+/* Reference these in your CSS to get the same color as the mockups */
+:root {
+  --actionBackgroundColor: #f76b8a;
+  --actionTextColor: white;
+  --activeColor: #66bfbf;
+  --standardBackgroundColor: #fcfefe;
+  --alternativeBackgroundColor: #eaf6f6;
+  --standardTextColor: black;
+  --lightColor: lightgray;
+  --moderateColor: darkgray;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  background-color: var(--alternativeBackgroundColor);
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus  {
+  outline-color: var(--activeColor);
+}
+
+select {
+  border-color: var(--moderateColor);
+}
+
+input[type=text] {
+  border-color: var(--lightColor);
+}
+
+input[type=submit]:hover,
+input[type=button]:hover,
+button:hover {
+  transform: scale(1.1);
+}
+
+/* Banner */
+#banner{
+  background-color: var(--standardBackgroundColor);
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#title{
+  width: fit-content;
+  min-width: fit-content;
+  justify-content: center;
+  text-align: left;
+  font-weight: bolder;
+  font-size: 25px;
+  cursor: default;
+}
+
+#menu{
+  width: 60%;
+  max-width: 400px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  margin-left: 40px;
+}
+
+.menu_option{
+  margin: 10px;
+  cursor: pointer;
+  min-width: fit-content;
+  font-weight: 600;
+}
+
+#profile_pic{
+  width: 60px;
+  height: 60px;
+  margin-left: 40px;
+  margin-top: 5px;
+  margin-right: 20px;
+  border-radius: 50%;
+
+  cursor: pointer;
+}
+
+
+/* < 600px */
+@media all and (max-width: 600px) {
+/* Bannar */
+  #menu, #profile_pic{
+    margin-left: 0px;
+  }
+  
 }
