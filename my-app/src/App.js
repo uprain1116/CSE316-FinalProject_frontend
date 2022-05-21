@@ -6,6 +6,7 @@ import ViewData from "./components/viewDataPage/ViewData";
 import Profile from "./components/profilePage/Profile";
 import Admin from "./components/adminPage/Admin";
 import Banner from "./components/Banner";
+import { RenderIf } from "./components/RenderIf";
 import './App.css';
 
 
@@ -14,14 +15,13 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Banner/>
         <Routes>
           <Route path = '/' element = {<Login/>}> </Route>
-          <Route path = '/logData' element = {<LogData/>}> </Route>
-          <Route path = '/editQ' element = {<EditQuestion/>}> </Route>
-          <Route path = '/viewData' element = {<ViewData/>}> </Route>
-          <Route path = '/profile' element = {<Profile/>}> </Route>
-          <Route path = '/admin' element = {<Admin/>}> </Route> 
+          <Route path = '/logData' element = {<> <Banner/> <LogData/> </>}> </Route>
+          <Route path = '/editQ' element = {<> <Banner/> <EditQuestion/> </>}> </Route>
+          <Route path = '/viewData' element = {<> <Banner/> <ViewData/> </>}> </Route>
+          <Route path = '/profile' element = {<> <Banner/> <Profile/> </>}> </Route>
+          <Route path = '/admin' element = {<> <Banner/> <Admin/> </>}> </Route> 
         </Routes>
       </BrowserRouter>
     </>
