@@ -1,0 +1,90 @@
+#logdatacarrior{
+    display: flex;
+    justify-content: center;
+}
+
+#logdatacontent{
+    display: table;
+    justify-content: space-between;
+}
+
+#datatime{
+    height: 80px;
+    width: 80vw;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    font-weight: bolder;
+    font-size: 30px;
+    /* border: 1px solid red; */
+}
+
+#logdataDate{
+    cursor: default;
+}
+
+#multipleBox{
+    display: table;
+}
+
+#logTrue{
+    margin-right: 50px;
+}
+
+#truefalsetable{
+    display: flex;
+}
+
+#numTextArea{
+    height: 30px;
+    border-radius: 5px;
+}
+
+#anyTextArea{
+    height: 30px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#savelogData{
+    background-color: var(--actionBackgroundColor);
+    color: var(--actionTextColor);
+    font-size: 90%;
+    margin-top: 20px;
+    margin-bottom: 13px;
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+}
+
+.sidebar{
+    width: 100px;
+    /* border: 1px solid red; */
+}
+
+.brackets{
+    cursor: pointer;
+}
+
+.logtype{
+    background-color: var(--standardBackgroundColor);
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 20px;
+}
+
+.logQuestion{
+    margin-bottom: 10px;
+    cursor: default;
+}
+
+.logMul{
+    margin-bottom: 10px;
+}
+
+@media all and (max-width: 600px) {
+    #datatime{
+        width: 94vw;
+    }
+}

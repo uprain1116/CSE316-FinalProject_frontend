@@ -29,7 +29,6 @@ function Banner(props){
             </div>
             <div id = "picture"> <img id = "profile_pic" src = "logo512.png" alt = "pic" onClick={() => navigate('/profile')}/> </div>
         </div>
-        
     );
 }
 

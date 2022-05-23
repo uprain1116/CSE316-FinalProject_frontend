@@ -1,6 +1,30 @@
+import "./logdata.css";
+import DisplayContent from "./DisplayContent";
+import { useState, useEffect } from "react";
+import { RenderIf } from "../RenderIf";
 function LogData(props){
+    const [windowSize, setWindowSize] = useState(0);
+    const updateDimensions = () => { setWindowSize(window.innerWidth); }
+
+    useEffect(() => {
+        setWindowSize(window.innerWidth);
+        window.addEventListener("resize", updateDimensions);
+    }, []);
+
     return(
-        <div> "testing" </div>
+        <>
+            <div id = "logdatacarrior">
+                <RenderIf isTrue={windowSize >=600}>
+                    <div className = "sidebar"></div>
+                </RenderIf>
+                <DisplayContent/>
+                <RenderIf isTrue={windowSize >=600}>
+                    <div className = "sidebar"></div>
+                </RenderIf>
+            </div>
+        </>
+
+        
     );
 }
 
