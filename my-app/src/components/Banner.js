@@ -26,6 +26,7 @@ function Banner(props){
                 <RenderIf isTrue={admin}>
                     <span className = "menu_option" onClick={() => navigate('/admin')}> Admin </span>
                 </RenderIf>
+
             </div>
             <div id = "picture"> <img id = "profile_pic" src = "logo512.png" alt = "pic" onClick={() => navigate('/profile')}/> </div>
         </div>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./logdata.css";
 
 function Multiple(props){
-    const [option, setOption] = useState('1');
+    const [option, setOption] = useState('0');
 
     const changeRadio = (event) => {
         //        event.preventDefault();

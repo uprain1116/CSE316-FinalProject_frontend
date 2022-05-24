@@ -5,7 +5,6 @@ function TrueFalse(props){
     const [truefalse, setTrueFalse] = useState(true);
 
     const changeRadio = (event) => {
-        //        event.preventDefault();
         if(truefalse) setTrueFalse(false);
         else setTrueFalse(true);
     }
