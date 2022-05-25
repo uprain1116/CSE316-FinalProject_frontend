@@ -1,0 +1,118 @@
+#profileTitle{
+    width: 85vw;
+    margin: 20px;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+#detailAddress{
+    margin-bottom: 10px;
+}
+
+#profileMainContainer{
+    display: flex;
+}
+
+#addImg_button{
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-weight: bold;
+
+    top: 50%; 
+    margin: 0 auto;
+    margin-top: 20px;
+    height: 40px;
+    width: 30vw;
+    border-radius: 10px;
+    background-color: var(--activeColor);
+    color: black;
+
+    margin-right: 25px;
+}
+
+
+#rmvImg_button{
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-weight: bold;
+
+    top: 50%; 
+    margin: 0 auto;
+    margin-top: 20px;
+    height: 40px;
+    width: 30vw;
+    border-radius: 10px;
+    color: black;
+    text-decoration: underline;
+}
+
+#profilePic{
+    width: 60px;
+    height: 60px;
+    margin-top: 5px;
+    margin-right: 25px;
+    border-radius: 50%;
+  
+    cursor: pointer;
+}
+
+#profilecarrior{
+    display: flex;
+    justify-content: center;
+}
+
+#saveProfileData{
+    background-color: var(--actionBackgroundColor);
+    color: var(--actionTextColor);
+    font-size: 90%;
+    margin-top: 20px;
+    margin-bottom: 13px;
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+}
+
+#logOutProfile{
+    color: black;
+    background-color: var(--alternativeBackgroundColor);
+    text-decoration: underline;
+    font-size: 90%;
+    margin-top: 20px;
+    margin-bottom: 13px;
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    float: right;
+}
+
+.profieSidebar{
+    width: 100px;
+    /* border: 10px soild red; */
+}
+
+
+.profileTextArea{
+    height: 30px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.profiletype{
+    background-color: var(--standardBackgroundColor);
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 20px;
+}
+
+.profileContentTitle{
+    margin-bottom: 10px;
+    cursor: default;
+    font-weight: bolder;
+    font-size: 25px;
+}

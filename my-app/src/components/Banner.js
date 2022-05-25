@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Banner(props){
     const navigate = useNavigate();
     const [windowSize, setWindowSize] = useState(0);
-    const [admin, setAdmin] = useState(false);
+    const [admin, setAdmin] = useState(true);
     const updateDimensions = () => { setWindowSize(window.innerWidth); }
 
     useEffect(() => {
