@@ -159,7 +159,7 @@ function EditQuestion(props){
                 <form  action="#">
                     <input id={ques.id} type="text" className={"edit-input"} onChange={handleInputChange} value={ques.questionInput}/>
                     <div className="select-and-delete">
-                    <select name={ques.id} id="question-types" onChange={handleSelectChange} >
+                    <select name={ques.id} id="question-types" onChange={handleSelectChange} value={ques.inputType}>
                         <option value="number">number</option>s
                         <option value="boolean">boolean</option>
                         <option value="text">text</option>

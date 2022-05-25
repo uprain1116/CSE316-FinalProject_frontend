@@ -58,6 +58,7 @@
 @media (min-width: 600px){
     .edit-page{
         margin:100px;
+        margin-top: 50px;
     }
 }
 @media (max-width: 600px){
