@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { RenderIf } from "./RenderIf";
 import { useNavigate } from "react-router-dom";
+import { RenderifBigSIze } from "./RenderifBigSIze";
 
 function Banner(props){
     const navigate = useNavigate();
@@ -16,9 +17,15 @@ function Banner(props){
 
     return(
         <div id = "banner">
-            <RenderIf isTrue={windowSize >= 600}>
+            {/* <RenderIf isTrue={windowSize >= 600}>
                 <div id = "title"> Day Logger </div>
-            </RenderIf>
+            </RenderIf> */}
+
+            <RenderifBigSIze> 
+                <div id = "title"> Day Logger </div>
+            </RenderifBigSIze>
+
+            
             <div id = "menu">
                 <span className = "menu_option" onClick={() => navigate('/logdata')}> Log day </span>
                 <span className = "menu_option" onClick={() => navigate('/editQ')}> Edit Question </span>

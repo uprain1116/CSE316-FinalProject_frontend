@@ -13,6 +13,7 @@ export const RenderifBigSIze = ({children}) => {
     }, []);
 
     const minSize = 600;
+    //standard 600px
 
     return windowSize >= minSize ? children : null;
 }
