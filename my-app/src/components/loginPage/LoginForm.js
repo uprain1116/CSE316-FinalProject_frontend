@@ -10,7 +10,7 @@ function LoginForm(props){
         const target = event.target;
         const value = target.value;
         const name = target.name;
-
+        
         const updatedUser = {...user, [name]: value};
         setUser(updatedUser);
     }

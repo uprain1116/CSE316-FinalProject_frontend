@@ -1,0 +1,86 @@
+#adminContent{
+    margin-top: 30px;
+    display: block;
+    font-size: 30px;
+}
+
+#adminContainer{
+    display: flex;
+    justify-content: center;
+}
+
+#userInfoTable{
+    margin-top: 20px;
+    width: 70vw;
+    height: 60vh;
+    min-height: 60vh;
+    border: 1px solid black;
+    overflow: scroll;
+    background-color: var(--standardBackgroundColor);
+    border-radius: 10px;
+}
+
+#adminTitle{
+    font-weight: bolder;
+}
+
+#adminTable{
+    border-collapse: collapse;
+}
+
+#namecol{
+    width: 17.5vw;
+}
+
+#emailcol{
+    width: 31.5vw;
+}
+
+#questioncol{
+    width: 7vw;
+}
+
+#responsecol{
+    width: 7vw;
+}
+
+#deletecol{
+    width: 7vw;
+}
+
+.td{
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    cursor: default;
+}
+
+.th{
+    background-color: var(--moderateColor);
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    font-size: 10px;
+    font-weight: bolder;
+    cursor: default;
+}
+
+.tr{
+    font-size: 10px;
+}
+  
+.tr:nth-child(even) {
+    background-color: var(--moderateColor);;
+}
+
+.material-icons{
+    cursor: pointer;
+}
+
+.adminSidebar{
+    width: 100px;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
