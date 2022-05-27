@@ -1,0 +1,88 @@
+@media (min-width: 600px){
+    .view-data-page{
+        margin:100px;
+        margin-top: 50px;
+    }
+}
+@media (max-width: 600px){
+    .view-data-page{
+        padding-top: 5%;
+        margin: 0px 20px;
+    }
+}
+
+.view-data-header{
+    background-color: rgba(250,250,250);
+    border-radius: 10px;
+
+}
+.header-top{
+    display: flex;
+    justify-content: space-around;
+    border-radius: 10px;
+
+}
+.header-tabs{
+    margin-top: 3%;
+    display: flex;
+
+
+    justify-content: space-evenly;
+}
+.question-tab, .date-tab{
+    flex-shrink: 0;
+    flex-grow: 1;
+}
+
+.question-button, .date-button{
+    width: 100%;
+    border: none;
+    padding: 10px;
+
+
+}
+.button-color{
+    background-color: royalblue;
+    color: white;
+}
+.view-data-select{
+    margin-top: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+#question-options{
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 5px 10px;
+}
+.type-of-data{
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 2%;
+    background-color: rgba(250,250,250);
+    padding: 1%;
+    border-radius: 10px;
+}
+
+#view-number,#view-multipleChoice,#view-boolean, #view-text{
+    margin-top: 10px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.date-changer{
+    margin: 3%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.date-changer button{
+    background-color: inherit;
+    border:none;
+    font-size: 1.5rem;
+}
+
