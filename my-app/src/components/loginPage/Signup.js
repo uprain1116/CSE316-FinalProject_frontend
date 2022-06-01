@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate  } from 'react-router-dom';
 import { RenderIf } from "../RenderIf";
 import "./loginStyle.css";
+import axios from 'axios';
 
 function Signup(props){
 
@@ -19,7 +20,34 @@ function Signup(props){
     }
 
     const handleSubmit = (event) => {
-        //handle error and submition here
+
+        event.preventDefault()
+       let userInfo= {
+            name: newUser.name,
+                email: newUser.email,
+            password: newUser.password,
+            address:{address1: "",
+            address2: "",}}
+       let questions=[{
+                    id: "",
+                    type:
+                        "",
+                    question: "",
+                    option: [""] || undefined
+                }]
+
+        let finalUser={userInfo,questions}
+        console.log(finalUser)
+        axios.post('/register', finalUser)
+            .then((response) => {
+                console.log(response);
+
+            }, (error) => {
+                setErr(error);
+            });
+
+
+
     }
 
     return(
