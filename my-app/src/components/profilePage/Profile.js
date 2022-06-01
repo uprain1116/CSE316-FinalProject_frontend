@@ -6,6 +6,7 @@ import ProfilePic from "./ProfilePic";
 import { useState, useEffect } from "react";
 import { RenderIf } from "../RenderIf";
 import { useNavigate } from "react-router-dom";
+import { logoutUserAPIMethod } from "../../api/client";
 function Profile(props){
 
     const [windowSize, setWindowSize] = useState(0);
@@ -19,6 +20,7 @@ function Profile(props){
 
     const clickLogOut = (event) => {
         event.preventDefault();
+        logoutUserAPIMethod();
         navigate("/");
     }
 

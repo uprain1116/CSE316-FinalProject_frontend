@@ -2,24 +2,30 @@ import { useState, useEffect } from "react";
 import { RenderIf } from "./RenderIf";
 import { useNavigate } from "react-router-dom";
 import { RenderifBigSIze } from "./RenderifBigSIze";
+import { getUserAPIMethod } from "../api/client";
 
 function Banner(props){
     const navigate = useNavigate();
     const [windowSize, setWindowSize] = useState(0);
-    const [admin, setAdmin] = useState(true);
+    const [admin, setAdmin] = useState(false);
     const updateDimensions = () => { setWindowSize(window.innerWidth); }
+
 
     useEffect(() => {
         setWindowSize(window.innerWidth);
         window.addEventListener("resize", updateDimensions);
     }, []);
 
+    useEffect(() => {
+        if(props.userid !== '' && props.userid  !== undefined){
+            getUserAPIMethod(props.userid).then((user) => {
+                setAdmin(user.userInfo.isAdmin);
+            })
+        }
+    }, []);
 
     return(
         <div id = "banner">
-            {/* <RenderIf isTrue={windowSize >= 600}>
-                <div id = "title"> Day Logger </div>
-            </RenderIf> */}
 
             <RenderifBigSIze> 
                 <div id = "title"> Day Logger </div>

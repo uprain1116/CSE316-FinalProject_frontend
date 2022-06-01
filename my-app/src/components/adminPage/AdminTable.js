@@ -1,13 +1,22 @@
 import "./admin.css";
 import { useState, useEffect } from "react";
 import { RenderIf } from "../RenderIf";
+import { getAllUserAPIMethod } from "../../api/client";
+
 
 function AdminTable(props){
+    const [allUsers, setAllUsers] = useState([]);
 
     const deleteUser = (event) => {
         event.preventDefault();
         console.log(event);
     }
+
+    useEffect(()=> {
+        getAllUserAPIMethod().then((allUsers) => {
+            setAllUsers(allUsers);
+        })
+    }, []);
 
     return(
         <table id = "adminTable">
@@ -21,23 +30,16 @@ function AdminTable(props){
                 </tr>
             </thead>
             <tbody>
-                <tr className="tr">
-                    <td className="td"> Sangwoo Park </td>
-                    <td className="td"> sangwoo.park.2@stonybrook.edu </td>
-                    <td className="td"> 100 </td>
-                    <td className="td"> 80 </td>
-                    <td className="td"> <span className="material-icons" onClick={deleteUser}> delete_outline </span> </td>
-                </tr>
-                <tr className="tr">
-                    <td className="td"> SomeoneElse </td>
-                    <td className="td"> someone.else@stonybrook.edu </td>
-                    <td className="td"> 20 </td>
-                    <td className="td"> 1 </td>
-                    <td className="td"> <span className="material-icons" onClick={deleteUser}> delete_outline </span> </td>
-                </tr>
-
+                {allUsers.map((user) => (
+                    <tr className="tr" key = {user._id}>
+                        <td className="td"> {user.userInfo.name} </td>
+                        <td className="td"> {user.userInfo.email} </td>
+                        <td className="td"> {user.questions.length} </td>
+                        <td className="td"> comming soon </td>
+                        <td className="td"> <span className="material-icons" onClick={deleteUser}> delete_outline </span> </td>
+                    </tr>
+            ))}
             </tbody>
-
         </table>
     );
 }

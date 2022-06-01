@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { RenderIf } from "../RenderIf";
 import AdminTable from "./AdminTable";
 
+
 function Admin(props){
     const [windowSize, setWindowSize] = useState(0);
     const updateDimensions = () => { setWindowSize(window.innerWidth); }

@@ -5,7 +5,7 @@ import Overlay from "./Overlay";
 import { useNavigate } from "react-router-dom";
 import "./loginStyle.css";
 import { RenderIf } from "../RenderIf";
-import axios from 'axios';
+import { loginUserAPIMethod } from "../../api/client";
 
 function Login(props){
     const [createNew, setCreateNew] = useState(false);
@@ -17,26 +17,18 @@ function Login(props){
     const clickCreateNew = () => { changeCreateNewState(); }
 
     const clickLogin = (user) => {
-        console.log(user)
         if(user.email === undefined || user.email === ''){ setErr('Enter a Email'); }
         else if(user.password === undefined || user.password === ''){ setErr('Enter a Password');}
         else {
-                axios.post('/login', user)
-                    .then((response) => {
-                        console.log(response.data)
-                        //setUserData(response.data)
-                        //console.log('agent=== '+response.data.agent);
-                        // setAgent(response.data.agent )
-                        // if (agent===response.data.agent){setConcat(false)}
-                        //setLogged(true);
-
-                        //check for login
-                        console.log('navigating logdat')
-                        navigate('/logData');
-                    })}
+            loginUserAPIMethod(user).then((valid) => {
+                props.setCurrentUser(valid);
+                navigate('/logdata');
+            }).catch((err) => {
+                console.log(err);
+                setErr('Error: Invalid email and/or password');
+            });
         }
-
-
+    }
 
     return(
         <div id = "landingPage">
