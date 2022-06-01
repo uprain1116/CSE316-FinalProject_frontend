@@ -14,6 +14,7 @@ function AdminTable(props){
 
     useEffect(()=> {
         getAllUserAPIMethod().then((allUsers) => {
+            allUsers = allUsers.filter(user => !(user.userInfo.isAdmin));
             setAllUsers(allUsers);
         })
     }, []);

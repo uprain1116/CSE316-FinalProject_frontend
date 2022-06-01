@@ -8,13 +8,15 @@ import Admin from "./components/adminPage/Admin";
 import Banner from "./components/Banner";
 import { RenderIf } from "./components/RenderIf";
 import './App.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 
 
 
 function App() {
   const [userID, setUserID] = useState('');
   const setCurrentUser = (currentUser) => {
+    console.log(currentUser);
     setUserID(currentUser);
   }
 
@@ -26,7 +28,7 @@ function App() {
           <Route path = '/logData' element = {<> <Banner userid = {userID} /> <LogData/> </>}> </Route>
           <Route path = '/editQ' element = {<> <Banner userid = {userID}/> <EditQuestion/> </>}> </Route>
           <Route path = '/viewData' element = {<> <Banner userid = {userID}/> <ViewData/> </>}> </Route>
-          <Route path = '/profile' element = {<> <Banner userid = {userID}/> <Profile /> </>}> </Route>
+          <Route path = '/profile' element = {<> <Banner userid = {userID}/> <Profile userid = {userID}/> </>}> </Route>
           <Route path = '/admin' element = {<> <Banner userid = {userID}/> <Admin/> </>}> </Route> 
         </Routes>
       </BrowserRouter>
