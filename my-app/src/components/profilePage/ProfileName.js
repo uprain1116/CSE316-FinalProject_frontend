@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./profile.css";
 function ProfileName(props){
 
-    const [name, setName] = useState(props.name);
+    const [name, setName] = useState("");
 
     const handleChange = (event) => {
         event.preventDefault();
@@ -16,7 +16,7 @@ function ProfileName(props){
     return(
         <div className = "profiletype">
             <div className="profileContentTitle">Name</div>
-            <div><input className = "profileTextArea" type = "text" value = {name} onChange = {handleChange}/></div>
+            <div><input className = "profileTextArea" type = "text" value = {name || ""} onChange = {handleChange}/></div>
         </div>
     );
 }

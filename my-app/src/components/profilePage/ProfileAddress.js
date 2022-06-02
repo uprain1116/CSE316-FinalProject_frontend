@@ -2,8 +2,8 @@ import "./profile.css";
 import { useState, useEffect } from "react";
 function ProfileAddress(props){
 
-    const [address1, setAddress1] = useState(props.address.address1);
-    const [address2, setAddress2] = useState(props.address.address2);
+    const [address1, setAddress1] = useState("");
+    const [address2, setAddress2] = useState("");
 
     const handleChange1 = (event) => {
         event.preventDefault();
@@ -17,8 +17,10 @@ function ProfileAddress(props){
 
 
     useEffect(() => {
-        setAddress1(props.address.address1);
-        setAddress2(props.address.address2)
+        if(props.address !== undefined){
+            setAddress1(props.address.address1);
+            setAddress2(props.address.address2)
+        }
     }, [props.address])
 
 
@@ -26,8 +28,8 @@ function ProfileAddress(props){
         <div className = "profiletype">
             <div className="profileContentTitle">Address</div>
             <div>
-                <input className = "profileTextArea" id = "detailAddress" type = "text" value = {address1} onChange = {handleChange1}/>
-                <input className = "profileTextArea" type = "text" value = {address2} onChange = {handleChange2}/>
+                <input className = "profileTextArea" id = "detailAddress" type = "text" value = {address1 || ""} onChange = {handleChange1}/>
+                <input className = "profileTextArea" type = "text" value = {address2 || ""} onChange = {handleChange2}/>
             </div>
         </div>
 

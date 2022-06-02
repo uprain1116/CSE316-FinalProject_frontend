@@ -59,6 +59,14 @@ export const logoutUserAPIMethod = () => {
         .then(parseJSON);
 }
 
+export const getSessionAPIMethod = () => {
+    return fetch(`/api/getcurrentsession`, {
+        ...defaultHeaders,
+        method: 'POST', // The method defaults to GET
+    }).then(checkStatus)
+        .then(parseJSON);
+}
+
 function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
         return response;

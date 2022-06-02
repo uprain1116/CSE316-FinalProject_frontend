@@ -20,9 +20,11 @@ function Banner(props){
         if(props.userid !== '' && props.userid  !== undefined){
             getUserAPIMethod(props.userid).then((user) => {
                 setAdmin(user.userInfo.isAdmin);
+            }).catch((err) => {
+                // navigate('/');
             })
         }
-    }, []);
+    }, [props.userid]);
 
     return(
         <div id = "banner">

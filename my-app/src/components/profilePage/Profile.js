@@ -16,12 +16,12 @@ function Profile(props){
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("submit")
+        console.log(event)
     }
 
     const clickLogOut = (event) => {
         event.preventDefault();
-        logoutUserAPIMethod();
+        logoutUserAPIMethod().then((value) => {}).catch((err) => {});
         navigate("/");
     }
 
@@ -36,7 +36,7 @@ function Profile(props){
                 setCurrentUser(user.userInfo);
             })
         }
-    }, []);
+    }, [props.userid]);
 
 
 
@@ -51,7 +51,6 @@ function Profile(props){
                         <ProfilePic/>
                         <ProfileName name = {currentUser.name}/>
                         <ProfileEmail email = {currentUser.email}/>
-                        {console.log('here', currentUser)}
                         <ProfileAddress address = {currentUser.address}/>
                         <div>
                             <button type = "submit" id = "saveProfileData">Save</button>
