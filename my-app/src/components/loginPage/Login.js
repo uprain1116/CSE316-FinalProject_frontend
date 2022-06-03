@@ -41,7 +41,7 @@ function Login(props){
             </div>
             <RenderIf isTrue={createNew}>
                 <Overlay profileButton = {clickCreateNew}/>
-                <Signup profileButton = {clickCreateNew}/>
+                <Signup profileButton = {clickCreateNew} setCurrentUser = {props.setCurrentUser}/>
             </RenderIf>
         </div>
     );

@@ -29,13 +29,23 @@ export const updateUserAPIMethod = (user) => {
         // .then(parseJSON);
 }
 
+//delete user
+export const deleteUserAPIMethod = (userID) => {
+    return fetch(`/api/users/${userID}`, {
+        ...defaultHeaders,
+        method: 'DELETE', // The method defaults to GET
+    }).then(checkStatus)
+        // .then(parseJSON);
+}
+
 //signup for a new account
 export const createUserAPIMethod = (user) => {
     return fetch(`/api/register`, {
         ...defaultHeaders,
         method: 'POST', // The method defaults to GET
         body: JSON.stringify(user),
-    }).then(checkStatus)
+    })
+    .then(checkStatus)
         // .then(parseJSON);
 }
 

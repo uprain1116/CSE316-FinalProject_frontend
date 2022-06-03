@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate  } from 'react-router-dom';
 import { RenderIf } from "../RenderIf";
 import "./loginStyle.css";
-import { createUserAPIMethod } from "../../api/client";
+import { createUserAPIMethod, getSessionAPIMethod } from "../../api/client";
 import axios from 'axios';
 
 function Signup(props){
@@ -41,8 +41,11 @@ function Signup(props){
         }
 
         createUserAPIMethod(finalUser).then((success) => {
-            console.dir(success);
-            navigate('/logData');
+            getSessionAPIMethod().then((value) => {
+                props.setCurrentUser(value);
+                navigate('/logData');
+              }).catch((err) => {
+              });
         }).catch((err) => {
             console.log(err);
             let error = err.status.split(' ');

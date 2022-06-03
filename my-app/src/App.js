@@ -10,6 +10,7 @@ import { RenderIf } from "./components/RenderIf";
 import './App.css';
 import { useState, useEffect } from "react";
 import { getSessionAPIMethod } from "./api/client";
+import Delayed from "./Delayed";
 
 
 
@@ -29,7 +30,8 @@ function App() {
 }, []);
 
   return (
-    <>
+    <>           
+    <Delayed waitBeforeShow={500}>
       <BrowserRouter>
         <Routes>
           <Route path = '/' element = {<Login setCurrentUser = {setCurrentUser} />}> </Route>
@@ -41,12 +43,12 @@ function App() {
             <Route path = '/editQ' element = {<> <Banner userid = {userID}/> <EditQuestion/> </>}> </Route>
             <Route path = '/viewData' element = {<> <Banner userid = {userID}/> <ViewData/> </>}> </Route>
             <Route path = '/profile' element = {<> <Banner userid = {userID}/> <Profile userid = {userID}/> </>}> </Route>
-            <Route path = '/admin' element = {<> <Banner userid = {userID}/> <Admin/> </>}> </Route> 
+            <Route path = '/admin' element = {<> <Banner userid = {userID}/> <Admin userid = {userID}/> </>}> </Route> 
           </>
           }
-
         </Routes>
       </BrowserRouter>
+    </Delayed>
     </>
   );
 }

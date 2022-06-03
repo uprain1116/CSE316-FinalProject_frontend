@@ -1,7 +1,6 @@
 import "./admin.css";
 import { useState, useEffect } from "react";
-import { RenderIf } from "../RenderIf";
-import { getAllUserAPIMethod } from "../../api/client";
+import { getAllUserAPIMethod, deleteUserAPIMethod } from "../../api/client";
 
 
 function AdminTable(props){
@@ -9,7 +8,9 @@ function AdminTable(props){
 
     const deleteUser = (event) => {
         event.preventDefault();
-        console.log(event);
+        deleteUserAPIMethod(event.target.id).then((result) => {
+            console.log('user deleted');
+        })
     }
 
     useEffect(()=> {
@@ -17,7 +18,7 @@ function AdminTable(props){
             allUsers = allUsers.filter(user => !(user.userInfo.isAdmin));
             setAllUsers(allUsers);
         })
-    }, []);
+    }, [allUsers]);
 
     return(
         <table id = "adminTable">
@@ -37,7 +38,7 @@ function AdminTable(props){
                         <td className="td"> {user.userInfo.email} </td>
                         <td className="td"> {user.questions.length} </td>
                         <td className="td"> comming soon </td>
-                        <td className="td"> <span className="material-icons" onClick={deleteUser}> delete_outline </span> </td>
+                        <td className="td"> <span className="material-icons" id = {user._id} onClick={deleteUser}> delete_outline </span> </td>
                     </tr>
             ))}
             </tbody>
