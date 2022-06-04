@@ -1,21 +1,24 @@
 import { useState } from "react";
 import "./logdata.css";
 
-function TrueFalse(props){
-    const [truefalse, setTrueFalse] = useState(true);
+function TrueFalse({question, question_id,handleChange,answer}){
+    const [option, setOption] = useState('2');
 
     const changeRadio = (event) => {
-        if(truefalse) setTrueFalse(false);
-        else setTrueFalse(true);
+        handleChange(event, question_id)
+        setOption(event.target.value);
     }
+
+    let res = (option==="1") ? "true" : "false";
+
 
     return(
         <>
-            <div className = "logtype">
-                <div className="logQuestion">Had a long walk Today</div>
+            <div className = "logtype" name={"boolean"} id={res}>
+                <div className="logQuestion">{question}</div>
                 <div id = "truefalsetable">
-                    <div id = "logTrue"> <input type="radio" name="truefalse" value="true" checked = {truefalse} onChange={changeRadio} />True </div>
-                    <div id = "logFalse"> <input type="radio" name="truefalse" value="false" checked = {!truefalse} onChange = {changeRadio}/>False </div>
+                    <div id = "logTrue"> <input type="radio" name="boolean" value="1" id={res} checked = {option==="1"} onChange={changeRadio} />True </div>
+                    <div id = "logFalse"> <input type="radio" value="0" checked = {option==="0"} onChange = {changeRadio}/>False </div>
                 </div>
             </div>
         </>

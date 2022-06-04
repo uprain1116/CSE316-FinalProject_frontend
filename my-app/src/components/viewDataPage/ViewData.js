@@ -35,6 +35,7 @@ function ViewData(props){
                 </div>
                 {!nextButtonClicked &&  <div>
                 {dummy_data.map((ques)=>{
+
                     switch (ques.inputType) {
                         case "text": return <ViewText  question={ques}/>;
                         case "number": return <ViewNumber   question={ques} />;

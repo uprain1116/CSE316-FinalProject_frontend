@@ -1,11 +1,19 @@
 import "./logdata.css";
+import {useState} from "react";
 
 function Text(props){
+    const [input, setInput] = useState('');
+
+    const updateData = (event) => {
+        event.preventDefault();
+        setInput(event.target.value);
+        props.handleChange(event, props.question_id);
+    }
     return(
         <>
-            <div className = "logtype">
-                <div className="logQuestion">One great thing that happened today</div>
-                <div><input id = "anyTextArea" type = "text" /></div>
+            <div className = "logtype" name="text" id={input}>
+                <div className="logQuestion">{props.question}</div>
+                <input id = "anyTextArea" type = "text"  value={input} onChange={updateData}/>
             </div>
         </>
     );

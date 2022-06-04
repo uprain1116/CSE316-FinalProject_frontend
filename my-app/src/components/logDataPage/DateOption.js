@@ -6,17 +6,20 @@ function DateOption(props){
     const formateDate = (date) => {
         return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
     }
+    props.setCurrentDate(formateDate(selectedDate))
 
     const nextDay = () => {
         let todayDate = formateDate(new Date());
         if(formateDate(selectedDate) === todayDate) return;
         const next = selectedDate.setDate(new Date(selectedDate).getDate() + 1);
         setSelectedDate(new Date(next));
+        props.setCurrentDate(new Date(next));
     }
 
     const previousDay = () => {
         const prev = selectedDate.setDate(new Date(selectedDate).getDate() - 1);
         setSelectedDate(new Date(prev));
+        props.setCurrentDate(new Date(prev));
     }
     
     return(
