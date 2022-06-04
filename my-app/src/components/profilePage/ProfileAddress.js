@@ -28,8 +28,8 @@ function ProfileAddress(props){
         <div className = "profiletype">
             <div className="profileContentTitle">Address</div>
             <div>
-                <input className = "profileTextArea" id = "detailAddress" type = "text" value = {address1 || ""} onChange = {handleChange1}/>
-                <input className = "profileTextArea" type = "text" value = {address2 || ""} onChange = {handleChange2}/>
+                <input className = "profileTextArea detailaddress" id = "address1" type = "text" value = {address1 || ""} onChange = {props.changeInput}/>
+                <input className = "profileTextArea" id = "address2" type = "text" value = {address2 || ""} onChange = {props.changeInput}/>
             </div>
         </div>
 

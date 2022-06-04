@@ -17,7 +17,7 @@ function ProfileEmail(props){
     return(
         <div className = "profiletype">
             <div className="profileContentTitle">Email</div>
-            <div><input className = "profileTextArea" type = "text" value = {email || ""} onChange = {handleChange}/></div>
+            <div><input className = "profileTextArea" id = "email" type = "text" value = {email || ""} onChange = {props.changeInput}/></div>
         </div>
 
     );

@@ -16,7 +16,7 @@ function ProfileName(props){
     return(
         <div className = "profiletype">
             <div className="profileContentTitle">Name</div>
-            <div><input className = "profileTextArea" type = "text" value = {name || ""} onChange = {handleChange}/></div>
+            <div><input className = "profileTextArea" id = "name" type = "text" value = {name || ""} onChange = {props.changeInput}/></div>
         </div>
     );
 }

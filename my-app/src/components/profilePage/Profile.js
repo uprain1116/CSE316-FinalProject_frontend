@@ -6,7 +6,7 @@ import ProfilePic from "./ProfilePic";
 import { useState, useEffect } from "react";
 import { RenderIf } from "../RenderIf";
 import { useNavigate } from "react-router-dom";
-import { logoutUserAPIMethod, getUserAPIMethod } from "../../api/client";
+import { logoutUserAPIMethod, getUserAPIMethod, updateUserAPIMethod } from "../../api/client";
 function Profile(props){
 
     const [windowSize, setWindowSize] = useState(0);
@@ -16,7 +16,26 @@ function Profile(props){
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(event)
+        updateUserAPIMethod(props.userid, currentUser).then((response) => {
+            console.log('updated user');
+        })
+    }
+
+    const changeInput = (event) => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.id;
+
+
+        if(name === 'address1' || name === 'address2') {
+            const updateAddress = {...currentUser['address'], [name]: value};
+            const updatedUser = {...currentUser, ['address']: updateAddress};
+            setCurrentUser(updatedUser);
+        }
+        else {
+            const updatedUser = {...currentUser, [name]: value};
+            setCurrentUser(updatedUser);
+        }
     }
 
     const clickLogOut = (event) => {
@@ -49,9 +68,9 @@ function Profile(props){
                 <div id = "profileTitle"> Edit Profile </div>
                     <form onSubmit={handleSubmit}>
                         <ProfilePic/>
-                        <ProfileName name = {currentUser.name}/>
-                        <ProfileEmail email = {currentUser.email}/>
-                        <ProfileAddress address = {currentUser.address}/>
+                        <ProfileName name = {currentUser.name} changeInput = {changeInput}/>
+                        <ProfileEmail email = {currentUser.email} changeInput = {changeInput}/>
+                        <ProfileAddress address = {currentUser.address} changeInput = {changeInput}/>
                         <div>
                             <button type = "submit" id = "saveProfileData">Save</button>
                             <button type = "button" id = "logOutProfile" onClick = {clickLogOut}>Logout</button>

@@ -20,8 +20,8 @@ export const getUserAPIMethod = (userID) => {
 }
 
 //update User Infomation
-export const updateUserAPIMethod = (user) => {
-    return fetch(`/api/users/${user._id}`, {
+export const updateUserAPIMethod = (userId, user) => {
+    return fetch(`/api/users/${userId}`, {
         ...defaultHeaders,
         method: 'PUT', // The method defaults to GET
         body: JSON.stringify(user),
