@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import './edit-page.css';
-import {getUserAPIMethod, updateUserAPIMethod} from "../../api/client";
+import {getUserAPIMethod, updateUserQAPIMethod} from "../../api/client";
 
 
 
@@ -184,8 +184,7 @@ function EditQuestion(props){
     let handleEditSubmit=(e)=>{
         e.preventDefault();
         let user={id: props.userid,userInfo:currentUser.userInfo, questions:questionsList }
-        //console.log(user)
-        updateUserAPIMethod(user).then((response) => {
+        updateUserQAPIMethod(user).then((response) => {
            console.log(response)
         })
     }

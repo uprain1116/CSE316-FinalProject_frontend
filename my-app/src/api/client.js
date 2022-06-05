@@ -21,7 +21,19 @@ export const getUserAPIMethod = (userID) => {
 
 //update User Infomation
 export const updateUserAPIMethod = (userId, user) => {
+    console.log(user);
+    return;
     return fetch(`/api/users/${userId}`, {
+        ...defaultHeaders,
+        method: 'PUT', // The method defaults to GET
+        body: JSON.stringify(user),
+    }).then(checkStatus)
+        // .then(parseJSON);
+}
+
+//update User Question
+export const updateUserQAPIMethod = (user) => {
+    return fetch(`/api/userQ/${user.id}`, {
         ...defaultHeaders,
         method: 'PUT', // The method defaults to GET
         body: JSON.stringify(user),
