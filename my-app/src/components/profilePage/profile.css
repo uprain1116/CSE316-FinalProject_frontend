@@ -11,44 +11,43 @@
 
 #profileMainContainer{
     display: flex;
+    justify-content: space-between;
 }
 
 #addImg_button{
     cursor: pointer;
-    border: none;
-    outline: none;
-    background: none;
-    font-weight: bold;
-
-    top: 50%; 
-    margin: 0 auto;
-    margin-top: 20px;
-    height: 40px;
-    width: 30vw;
     border-radius: 10px;
     background-color: var(--activeColor);
-    color: black;
+    padding: 10px 15px;
+    border:none;
 
-    margin-right: 25px;
 }
-
 
 #rmvImg_button{
-    cursor: pointer;
     border: none;
-    outline: none;
-    background: none;
-    font-weight: bold;
-
-    top: 50%; 
-    margin: 0 auto;
-    margin-top: 20px;
-    height: 40px;
-    width: 30vw;
-    border-radius: 10px;
-    color: black;
+    cursor: pointer;
+    background-color: white;
     text-decoration: underline;
 }
+#addImg_button,#rmvImg_button{
+
+}
+/*#rmvImg_button{*/
+/*    cursor: pointer;*/
+/*    border: none;*/
+/*    outline: none;*/
+/*    background: none;*/
+/*    font-weight: bold;*/
+
+/*    top: 50%; */
+/*    margin: 0 auto;*/
+/*    margin-top: 20px;*/
+/*    height: 40px;*/
+/*    width: 30vw;*/
+/*    border-radius: 10px;*/
+/*    color: black;*/
+/*    text-decoration: underline;*/
+/*}*/
 
 #profilePic{
     width: 60px;
@@ -111,8 +110,14 @@
 }
 
 .profileContentTitle{
-    margin-bottom: 10px;
-    cursor: default;
-    font-weight: bolder;
+    /*margin-bottom: 10px;*/
+    /*cursor: default;*/
+    font-weight: bold;
     font-size: 25px;
+}
+#file-upload{
+    display: none;
+}
+.custom-file-upload{
+
 }
