@@ -12,6 +12,7 @@ function Profile(props){
     const [windowSize, setWindowSize] = useState(0);
     const [currentUser, setCurrentUser] = useState([]);
     const updateDimensions = () => { setWindowSize(window.innerWidth); }
+    const [profileURL, setProfileURL]=useState('http://res.cloudinary.com/abhishekgaire/image/upload/v1652121601/rzfrtvnxr7syf5yecshs.jpg')
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
@@ -20,6 +21,8 @@ function Profile(props){
             console.log('updated user');
         })
     }
+
+
 
     const changeInput = (event) => {
         const target = event.target;
@@ -60,14 +63,17 @@ function Profile(props){
 
 
     return(
+
         <div id = "profilecarrior">
+
             <RenderIf isTrue={windowSize >=600}>
                 <div className = "profieSidebar"></div>
             </RenderIf>
             <div id = "profileFormContainer">
                 <div id = "profileTitle"> Edit Profile </div>
                     <form onSubmit={handleSubmit}>
-                        <ProfilePic/>
+                        <ProfilePic setProfileURL={setProfileURL}
+                        profileURL={profileURL}/>
                         <ProfileName name = {currentUser.name} changeInput = {changeInput}/>
                         <ProfileEmail email = {currentUser.email} changeInput = {changeInput}/>
                         <ProfileAddress address = {currentUser.address} changeInput = {changeInput}/>
