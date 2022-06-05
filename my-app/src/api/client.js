@@ -55,8 +55,8 @@ export const createUserAPIMethod = (user) => {
         method: 'POST', // The method defaults to GET
         body: JSON.stringify(user),
     })
-    .then(checkStatus)
-        // .then(parseJSON);
+    // .then(checkStatus)
+        .then(parseJSON);
 }
 
 //login
@@ -86,6 +86,41 @@ export const getSessionAPIMethod = () => {
     }).then(checkStatus)
         .then(parseJSON);
 }
+
+//######################################################################################
+
+
+export const getLogData = () => {
+    return fetch(`/api/logs`, {
+        ...defaultHeaders,
+    }).then(checkStatus)
+        .then(parseJSON);
+}
+
+
+export const createLogAPIMethod = (log) => {
+    return fetch(`/api/createLog`, {
+        ...defaultHeaders,
+        method: 'POST', // The method defaults to GET
+        body: JSON.stringify(log),
+    })
+    .then(checkStatus)
+        // .then(parseJSON);
+}
+
+//update Log
+export const updateLogAPIMethod = (user) => {
+    console.log(user._id);
+    return fetch(`/api/log/${user._id}`, {
+        ...defaultHeaders,
+        method: 'PUT', // The method defaults to GET
+        body: JSON.stringify(user),
+    }).then(checkStatus)
+        // .then(parseJSON);
+}
+
+
+//######################################################################################
 
 function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {

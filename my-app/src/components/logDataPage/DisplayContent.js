@@ -4,160 +4,118 @@ import Numeric from "./Numeric";
 import TrueFalse from "./TrueFalse";
 import Text from "./Text";
 import Multiple from "./Multiple";
-import ViewText from "../viewDataPage/ViewText";
-import ViewNumber from "../viewDataPage/ViewNumber";
-import ViewMultipleChoice from "../viewDataPage/ViewMultipleChoice";
-import ViewBoolean from "../viewDataPage/ViewBoolean";
 import {useEffect, useState} from "react"
-import {getUserAPIMethod} from "../../api/client";
-import axios from "axios";
+import { getUserAPIMethod, getLogData, updateLogAPIMethod } from "../../api/client";
+import { RenderIf } from "../RenderIf";
 
 function DisplayContent(props){
-    const [currentUserQuestions, setCurrentUserQuestions] = useState({});
-    const [currentDate, setCurrentDate]= useState('')
-    //const[currentLog,setCurrentLog]=useState([])
-    const [log, setLog]=useState(null)
-
-    //console.log(currentDate)
-
-    useEffect(() => {
-        if(props.userid !== '' && props.userid  !== undefined){
-            getUserAPIMethod(props.userid).then((user) => {
-                setCurrentUserQuestions(user.questions);
-
-                console.log(user.questions)
-            })
-            axios.get("/api/logs")
-                .then((res)=>{
-                    if (res.data!==undefined){
-                    setLog(res.data[0])
-
-                        // let a_log=res.data[0].responses.map((response)=>{
-                        //         if(response.date==currentDate){
-                        //             return response.answer
-                        //         }
-                        //
-                        //     }
-                        //
-                        //
-                        // )
-                        // console.log(currentDate)
-                        // setCurrentLog(res.data[0].responses[0].answer)
-                    }}
-
-                )
-                .catch((e)=>console.log(e))
+    const [questions, setQuestions] = useState([]);
+    const [allLogs, setAlllogs] = useState([]);
+    const [todayAns, setTodayAns] = useState([]);
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [submit, setSubmit] = useState(false);
 
 
-        }
-    }, [props.userid]);
+    const changeInput = (event, qid, type) => {
+        console.log('change');
 
-
-    // useEffect(()=>{
-    //     if(log!=undefined){
-    //         let a= log.responses.find((response)=>response.date==currentDate)
-    //         console.log(a)
-    //         if(a!=undefined){
-    //             setCurrentLog(a.answer)
-    //         }
-    //         else{
-    //             setCurrentLog([])
-    //         }
-    //
-    //     }
-    //
-    // },[currentDate])
-
-
-    const  findQuestion=(givenId)=>{
-        return currentUserQuestions.find((question) => question.id === givenId)
-
-    }
-
-    const handleChange = (e, givenId) => {
-
-        let currentQuestion=findQuestion(givenId)
-
-        let updated_logs;
-        let currentResponseIndex;
-        if (log!==undefined)
-        { currentResponseIndex= log.responses.findIndex((res)=>res.date===currentDate)}
-        if (log===undefined){
-            setLog({userId:props.userid, responses:[{date:currentDate, answer:[{qid:givenId, questionType:currentQuestion.questionType, ans:e.target.value}]}]})
-        }
-        else if(currentResponseIndex===-1){
-            updated_logs={...log, responses:[...log.responses,{date:currentDate, answer:[{qid:givenId, questionType:currentQuestion.questionType, ans:e.target.value}]}]}
-
-            setLog(updated_logs)
+        if(todayAns.length === 0){
+            const updateAns = [{qid: qid, questionType: type, ans: event.target.value}];
+            setTodayAns(updateAns);
         }
         else{
-           let currentAnsIndex= log.responses[currentResponseIndex].answer.findIndex((ans)=>ans.qid===givenId)
-            if (currentAnsIndex===-1){
-                updated_logs={...log,  responses:[...log.responses.slice(0,currentResponseIndex),{ date: currentDate, answer:[...log.responses[currentResponseIndex].answer,{qid:givenId, questionType:currentQuestion.questionType, ans:e.target.value  }]}]}
-                setLog(updated_logs)
-            }
-            else{
-                updated_logs={...log, responses:[...log.responses.slice(0,currentResponseIndex),{ date: currentDate, answer:[...log.responses[currentResponseIndex].answer.slice(0,currentAnsIndex),{qid:givenId, questionType:currentQuestion.questionType, ans:e.target.value  },...log.responses[currentResponseIndex].answer.slice(currentAnsIndex+1)]},...log.responses.slice(currentResponseIndex+1)]}
-                setLog(updated_logs)
-            }}
+            const updateAns = todayAns.filter((ans) => ans.qid !== qid);
+            updateAns.push({qid: qid, questionType: type, ans: event.target.value});
+            setTodayAns(updateAns);
+        }  
     }
 
-        const handleSubmit = (event) =>{
+    const handleSubmit = (event) => {
         event.preventDefault();
+        console.log(todayAns);
+        console.log(allLogs.responses);
 
-        axios.post('/api/logs', log)
-            .then((res)=>console.log(res))
-            .catch((e)=>console.log(e))
+        const findLog = {...allLogs, responses: allLogs.responses.filter((logbyDate) => formateDate(new Date(logbyDate.date)) !== formateDate(selectedDate))};
+        console.log('find', findLog);
+        const savelog = {...findLog, responses: [...findLog.responses, {...findLog.responses, date: selectedDate, answer: todayAns}]};
+        console.log('here', savelog);
 
-
+        updateLogAPIMethod(savelog).then((result) => {
+            console.log(result);
+            setSubmit(true);
+        })
     }
+
+    const formateDate = (date) => {
+        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    }
+
+    const nextDay = () => {
+        let todayDate = formateDate(new Date());
+        if(formateDate(selectedDate) === todayDate) return;
+        const next = selectedDate.setDate(new Date(selectedDate).getDate() + 1);
+        setSelectedDate(new Date(next));
+    }
+
+    const previousDay = () => {
+        const prev = selectedDate.setDate(new Date(selectedDate).getDate() - 1);
+        setSelectedDate(new Date(prev));
+    }
+    
+    useEffect(() => {
+        getUserAPIMethod(props.userid).then((user) => {
+            setQuestions(user.questions);
+        }).catch((err) => {
+            console.log(err);
+        })
+    }, [])
+
+    useEffect(() => {
+        getLogData().then((logs) => {
+            if(logs[0].responses.length === 0) setAlllogs(logs[0]);
+            else {
+                setAlllogs(logs[0]);
+            }
+            setSubmit(false);
+        })
+    }, [submit])
+
+    useEffect(() => {
+        if(allLogs.length === 0) return;
+        const updateLogbyDate = allLogs.responses.filter((item) => formateDate(new Date (item.date)) === formateDate(selectedDate));
+        if(updateLogbyDate.length === 0) setTodayAns([]);
+        else setTodayAns(updateLogbyDate[0].answer);
+
+    }, [allLogs, selectedDate])
+
+    
     return(
          <>
-
-             {currentUserQuestions.length>0 &&  <div id = "logdatacontent">
-
-                <DateOption setCurrentDate={setCurrentDate}/>
+             <div id = "logdatacontent">
+                <DateOption nextDay = {nextDay} previousDay = {previousDay} selectedDate = {formateDate(selectedDate)}/>
                 <form onSubmit={handleSubmit}>
-                   {currentUserQuestions.map((ques)=> {
-                       //console.log(ques)
-
-                       switch (ques.questionType) {
-                           case "text":
-                               return <Text
-                               question={ques.question}
-                               question_id={ques.id}
-                               handleChange={handleChange}
-
-                               />;
-                           case "number":
-                               return <Numeric question={ques.question}
-                                               question_id={ques.id}
-                                                handleChange={handleChange}
-
-                               />;
-                           case "multiple-choice":
-                               return <Multiple question={ques.question}
-                                                options={ques.option}
-                                                question_id={ques.id}
-                                                handleChange={handleChange}
-
-                               />
-                           case "boolean":
-                               return <TrueFalse question={ques.question}
-                                                 question_id={ques.id}
-                                                 handleChange={handleChange}
-
-                               />
-                       }
-                   })}
-
-
-
-                      <div>
-                        <button type = "submit" id = "savelogData" onClick={handleSubmit}>Submit</button>
+                    {questions.map((quest) => (
+                        <div key = {quest.id}>
+                            {/* {console.log(quest)}; */}
+                            <RenderIf isTrue={quest.questionType === 'number'} >
+                                <Numeric question = {quest.question} qid = {quest.id} changefunction = {changeInput} answer = {todayAns}/>
+                            </RenderIf>
+                            <RenderIf isTrue={quest.questionType === 'boolean'}>
+                                <TrueFalse question = {quest.question} qid = {quest.id} changefunction = {changeInput} answer = {todayAns}/>
+                            </RenderIf>
+                            <RenderIf isTrue={quest.questionType === 'text'}>
+                                <Text question = {quest.question} qid = {quest.id} changefunction = {changeInput} answer = {todayAns}/>
+                            </RenderIf>
+                            <RenderIf isTrue={quest.questionType === 'multiple-choice'}>
+                                <Multiple question = {quest.question} multioption = {quest.option} qid = {quest.id} changefunction = {changeInput} answer = {todayAns}/>
+                            </RenderIf>
+                        </div>
+                    ))}
+                    <div>
+                        <button type = "submit" id = "savelogData">Submit</button>
                     </div>
                 </form>
-            </div>}
+            </div>
         </>
     );
 }

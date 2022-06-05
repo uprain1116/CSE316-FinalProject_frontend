@@ -1,32 +1,12 @@
 import { useState } from "react";
 import "./logdata.css";
 function DateOption(props){
-    const [selectedDate, setSelectedDate] = useState(new Date());
-
-    const formateDate = (date) => {
-        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-    }
-    props.setCurrentDate(formateDate(selectedDate))
-
-    const nextDay = () => {
-        let todayDate = formateDate(new Date());
-        if(formateDate(selectedDate) === todayDate) return;
-        const next = selectedDate.setDate(new Date(selectedDate).getDate() + 1);
-        setSelectedDate(new Date(next));
-        props.setCurrentDate(new Date(next));
-    }
-
-    const previousDay = () => {
-        const prev = selectedDate.setDate(new Date(selectedDate).getDate() - 1);
-        setSelectedDate(new Date(prev));
-        props.setCurrentDate(new Date(prev));
-    }
     
     return(
         <div className = "logtype_date" id = "datatime">
-            <div className="brackets" onClick={previousDay}> &#60; </div>
-            <div id = "logdataDate"> {formateDate(selectedDate)} </div>
-            <div className="brackets" onClick={nextDay}> &#62; </div>
+            <div className="brackets" onClick={props.previousDay}> &#60; </div>
+            <div id = "logdataDate"> {props.selectedDate} </div>
+            <div className="brackets" onClick={props.nextDay}> &#62; </div>
         </div>
     );
 }

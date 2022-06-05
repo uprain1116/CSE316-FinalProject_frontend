@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate  } from 'react-router-dom';
 import { RenderIf } from "../RenderIf";
 import "./loginStyle.css";
-import { createUserAPIMethod, getSessionAPIMethod } from "../../api/client";
+import { createUserAPIMethod, getSessionAPIMethod, createLogAPIMethod } from "../../api/client";
 import axios from 'axios';
 
 function Signup(props){
@@ -40,12 +40,22 @@ function Signup(props){
             questions: []
         }
 
+
+
         createUserAPIMethod(finalUser).then((success) => {
-            getSessionAPIMethod().then((value) => {
-                props.setCurrentUser(value);
-                navigate('/logData');
-              }).catch((err) => {
-              });
+
+            let finalLog = {
+                userid: success,
+                responses: []
+            
+            }
+            createLogAPIMethod(finalLog).then((logcreated) => {
+                getSessionAPIMethod().then((value) => {
+                    props.setCurrentUser(value);
+                    navigate('/logData');
+                }).catch((err) => { });
+            }).catch((err) => { });
+
         }).catch((err) => {
             console.log(err);
             let error = err.status.split(' ');

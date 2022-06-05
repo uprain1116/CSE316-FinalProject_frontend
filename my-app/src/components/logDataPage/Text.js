@@ -1,5 +1,5 @@
 import "./logdata.css";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 function Text(props){
     const [input, setInput] = useState('');
@@ -7,13 +7,21 @@ function Text(props){
     const updateData = (event) => {
         event.preventDefault();
         setInput(event.target.value);
-        props.handleChange(event, props.question_id);
+        props.changefunction(event, props.qid, 'text')
     }
+
+    useEffect(() => {
+        const newInput = props.answer.filter((logcheck) => logcheck.qid === props.qid);
+        if(newInput.length === 0) setInput("");
+        else setInput(newInput[0].ans);
+    }, [props.answer])
+
+
     return(
         <>
-            <div className = "logtype" name="text" id={input}>
+            <div className = "logtype">
                 <div className="logQuestion">{props.question}</div>
-                <input id = "anyTextArea" type = "text"  value={input} onChange={updateData}/>
+                <div><input id = "anyTextArea" type = "text" value = {input} onChange={updateData}/></div>
             </div>
         </>
     );

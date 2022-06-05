@@ -1,24 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./logdata.css";
 
-function TrueFalse({question, question_id,handleChange,answer}){
-    const [option, setOption] = useState('2');
+function TrueFalse(props){
+    const [truefalse, setTrueFalse] = useState("");
 
     const changeRadio = (event) => {
-        handleChange(event, question_id)
-        setOption(event.target.value);
+        if(truefalse === "true") setTrueFalse("false");
+        else setTrueFalse("true");
+        props.changefunction(event, props.qid, 'boolean')
     }
 
-    let res = (option==="1") ? "true" : "false";
-
+    useEffect(() => {
+        const newInput = props.answer.filter((logcheck) => logcheck.qid === props.qid);
+        if(newInput.length === 0) setTrueFalse("");
+        else setTrueFalse(newInput[0].ans);
+    }, [props.answer])
 
     return(
         <>
-            <div className = "logtype" name={"boolean"} id={res}>
-                <div className="logQuestion">{question}</div>
+            <div className = "logtype">
+                <div className="logQuestion">{props.question}</div>
                 <div id = "truefalsetable">
-                    <div id = "logTrue"> <input type="radio" name="boolean" value="1" id={res} checked = {option==="1"} onChange={changeRadio} />True </div>
-                    <div id = "logFalse"> <input type="radio" value="0" checked = {option==="0"} onChange = {changeRadio}/>False </div>
+                    <div id = "logTrue"> <input type="radio" name="truefalse" value="true" checked = {truefalse === "true"} onChange={changeRadio} />True </div>
+                    <div id = "logFalse"> <input type="radio" name="truefalse" value="false" checked = {truefalse === "false"} onChange = {changeRadio}/>False </div>
                 </div>
             </div>
         </>
