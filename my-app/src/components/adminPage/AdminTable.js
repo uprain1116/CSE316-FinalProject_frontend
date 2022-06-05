@@ -1,10 +1,8 @@
 import "./admin.css";
-import { useState, useEffect } from "react";
-import { getAllUserAPIMethod, deleteUserAPIMethod } from "../../api/client";
+import {  deleteUserAPIMethod } from "../../api/client";
 
 
 function AdminTable(props){
-    const [allUsers, setAllUsers] = useState([]);
 
     const deleteUser = (event) => {
         event.preventDefault();
@@ -13,12 +11,6 @@ function AdminTable(props){
         })
     }
 
-    useEffect(()=> {
-        getAllUserAPIMethod().then((allUsers) => {
-            allUsers = allUsers.filter(user => !(user.userInfo.isAdmin));
-            setAllUsers(allUsers);
-        })
-    }, [allUsers]);
 
     return(
         <table id = "adminTable">
@@ -32,14 +24,14 @@ function AdminTable(props){
                 </tr>
             </thead>
             <tbody>
-                {allUsers.map((user) => (
-                    <tr className="tr" key = {user._id}>
-                        <td className="td"> {user.userInfo.name} </td>
-                        <td className="td"> {user.userInfo.email} </td>
-                        <td className="td"> {user.questions.length} </td>
-                        <td className="td"> comming soon </td>
-                        <td className="td"> <span className="material-icons" id = {user._id} onClick={deleteUser}> delete_outline </span> </td>
-                    </tr>
+                {props.tableData.map((userP) => (
+                        <tr className="tr" key = {userP._id}>
+                            <td className="td"> {userP.userInfo.name} </td>
+                            <td className="td"> {userP.userInfo.email} </td>
+                            <td className="td"> {userP.questions.length} </td>
+                            <td className="td"> {userP.userLogs} </td>
+                            <td className="td"> <span className="material-icons" id = {userP._id} onClick={deleteUser}> delete_outline </span> </td>
+                        </tr>
             ))}
             </tbody>
         </table>

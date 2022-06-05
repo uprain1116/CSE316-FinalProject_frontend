@@ -32,18 +32,17 @@ function DisplayContent(props){
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(todayAns);
-        console.log(allLogs.responses);
+
 
         const findLog = {...allLogs, responses: allLogs.responses.filter((logbyDate) => formateDate(new Date(logbyDate.date)) !== formateDate(selectedDate))};
-        console.log('find', findLog);
+
         const savelog = {...findLog, responses: [...findLog.responses, {...findLog.responses, date: selectedDate, answer: todayAns}]};
         console.log('here', savelog);
 
-        updateLogAPIMethod(savelog).then((result) => {
-            console.log(result);
-            setSubmit(true);
-        })
+        // updateLogAPIMethod(savelog).then((result) => {
+        //     console.log(result);
+        //     setSubmit(true);
+        // })
     }
 
     const formateDate = (date) => {

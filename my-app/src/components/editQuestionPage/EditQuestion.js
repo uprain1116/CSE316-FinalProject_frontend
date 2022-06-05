@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import './edit-page.css';
-import {getUserAPIMethod, updateUserQAPIMethod} from "../../api/client";
+import {getUserAPIMethod, updateUserQAPIMethod, getLogData} from "../../api/client";
 
 
 
@@ -91,7 +91,9 @@ function EditQuestion(props){
     }
     let handleDeleteClick=(e)=>{
         e.preventDefault()
-        //console.log(e.target.value +"delete")
+
+
+
         let newList=questionsList.filter((ques) => ques.id !=e.target.value)
 
         //
@@ -183,6 +185,7 @@ function EditQuestion(props){
 
     let handleEditSubmit=(e)=>{
         e.preventDefault();
+
         let user={id: props.userid,userInfo:currentUser.userInfo, questions:questionsList }
         updateUserQAPIMethod(user).then((response) => {
            console.log(response)

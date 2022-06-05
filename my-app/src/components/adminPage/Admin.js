@@ -6,9 +6,12 @@ import { getUserAPIMethod } from "../../api/client";
 import Delayed from "../../Delayed";
 
 
+import { getAllUserAPIMethod, getLogDataById } from "../../api/client";
+
 function Admin(props){
     const [windowSize, setWindowSize] = useState(0);
     const [admin, setAdmin] = useState(false);
+    const [userLogs, setUserLogs] = useState([]);
     const updateDimensions = () => { setWindowSize(window.innerWidth); }
 
     useEffect(() => {
@@ -22,6 +25,18 @@ function Admin(props){
         })
     }, []);
 
+    useEffect(()=> {
+        getAllUserAPIMethod().then((getuser) => {
+            const newGetUser = getuser.filter(user => !(user.userInfo.isAdmin));
+            newGetUser.map((user) => {
+                getLogDataById(user._id).then((result) => {
+                    user.userLogs = result[0].responses.length;
+                })
+            });
+            setUserLogs(newGetUser);
+        })
+    }, []);
+
     return(
         <Delayed waitBeforeShow={500}>
         <RenderIf isTrue={admin}>
@@ -32,7 +47,7 @@ function Admin(props){
 
                 <div id = "adminContent">
                     <div id = "adminTitle"> User Info </div>
-                    <div id = "userInfoTable"> <AdminTable/> </div>
+                    <div id = "userInfoTable"> <AdminTable tableData = {userLogs}/> </div>
                 </div>
                 <RenderIf isTrue={windowSize >=600}>
                     <div className = "adminSidebar"></div>

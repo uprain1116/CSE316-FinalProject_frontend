@@ -97,6 +97,13 @@ export const getLogData = () => {
         .then(parseJSON);
 }
 
+export const getLogDataById = (userID) => {
+    return fetch(`/api/logs/${userID}`, {
+        ...defaultHeaders,
+    }).then(checkStatus)
+        .then(parseJSON);
+}
+
 
 export const createLogAPIMethod = (log) => {
     return fetch(`/api/createLog`, {
