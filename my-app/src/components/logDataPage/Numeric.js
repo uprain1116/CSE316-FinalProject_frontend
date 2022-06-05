@@ -7,13 +7,14 @@ function Numeric(props){
     const updateData = (event) => {
         event.preventDefault();
         if(!(isNaN(event.target.value))) setInput(event.target.value);
+        props.handleChange(event, props.question_id);
     }
 
     return(
         <>
-            <div className = "logtype" >
-                <div className="logQuestion">Number of pushups</div>
-                <div><input id = "numTextArea" type = "text" value={input} onChange={updateData}/></div>
+            <div className = "logtype" name={"number"} id={input}>
+                <div className="logQuestion">{props.question}</div>
+                <div><input id = "numTextArea" type = "text" name={"number"} value={input} onChange={updateData}/></div>
             </div>
         </>
     );

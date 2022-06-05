@@ -2,11 +2,15 @@ import "./logdata.css";
 import DisplayContent from "./DisplayContent";
 import { useState, useEffect } from "react";
 import { RenderIf } from "../RenderIf";
+import {getUserAPIMethod} from "../../api/client";
 function LogData(props){
     const [windowSize, setWindowSize] = useState(0);
     const updateDimensions = () => { setWindowSize(window.innerWidth); }
 
+
+
     useEffect(() => {
+
         setWindowSize(window.innerWidth);
         window.addEventListener("resize", updateDimensions);
     }, []);
@@ -17,7 +21,7 @@ function LogData(props){
                 <RenderIf isTrue={windowSize >=600}>
                     <div className = "sidebar"></div>
                 </RenderIf>
-                <DisplayContent/>
+                <DisplayContent userid={props.userid}/>
                 <RenderIf isTrue={windowSize >=600}>
                     <div className = "sidebar"></div>
                 </RenderIf>

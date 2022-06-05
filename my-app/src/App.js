@@ -39,8 +39,8 @@ function App() {
             <Route path = '*' element = {<Navigate to = "/"/>}/>
           :
           <>
-            <Route path = '/logData' element = {<> <Banner userid = {userID} /> <LogData/> </>}> </Route>
-            <Route path = '/editQ' element = {<> <Banner userid = {userID}/> <EditQuestion/> </>}> </Route>
+            <Route path = '/logData' element = {<> <Banner userid = {userID} /> <LogData userid = {userID}/> </>}> </Route>
+            <Route path = '/editQ' element = {<> <Banner userid = {userID}/> <EditQuestion userid = {userID}/> </>}> </Route>
             <Route path = '/viewData' element = {<> <Banner userid = {userID}/> <ViewData/> </>}> </Route>
             <Route path = '/profile' element = {<> <Banner userid = {userID}/> <Profile userid = {userID}/> </>}> </Route>
             <Route path = '/admin' element = {<> <Banner userid = {userID}/> <Admin userid = {userID}/> </>}> </Route> 
