@@ -21,8 +21,6 @@ export const getUserAPIMethod = (userID) => {
 
 //update User Infomation
 export const updateUserAPIMethod = (userId, user) => {
-    console.log(user);
-    return;
     return fetch(`/api/users/${userId}`, {
         ...defaultHeaders,
         method: 'PUT', // The method defaults to GET
