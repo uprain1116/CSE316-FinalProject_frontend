@@ -5,8 +5,10 @@ import {Legend, LineChart, CartesianGrid, XAxis, YAxis,Tooltip,Line} from "recha
 function ViewNumber({question}){
     let sortedResponses= question.response.sort((firstItem, secondItem) => firstItem.date - secondItem.date)
     let responses= sortedResponses.map((response) => {
-        return {name:response.date, val:response.data}
+        let date_data=new Date(response.date)
+        return {name:date_data.toLocaleDateString(), val:response.data}
     })
+    console.log(responses)
 
     return(
         <>

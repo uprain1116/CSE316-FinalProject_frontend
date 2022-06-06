@@ -35,7 +35,10 @@ function Signup(props){
                     address1: "",
                     address2: ""
                 },
-                isAdmin: false
+
+                isAdmin: false,
+                profile_url:'http://res.cloudinary.com/abhishekgaire/image/upload/v1652121601/rzfrtvnxr7syf5yecshs.jpg',
+
             },
             questions: []
         }

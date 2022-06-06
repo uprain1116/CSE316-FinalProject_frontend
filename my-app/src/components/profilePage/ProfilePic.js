@@ -7,7 +7,12 @@ function ProfilePic(props){
     // }
 
     const rmvImage = () => {
-        console.log('remove image');
+        props.setProfileURL('http://res.cloudinary.com/abhishekgaire/image/upload/v1652121601/rzfrtvnxr7syf5yecshs.jpg')
+        let a= props.currentUser
+        a.currentUser.profile_url='http://res.cloudinary.com/abhishekgaire/image/upload/v1652121601/rzfrtvnxr7syf5yecshs.jpg'
+
+        console.log(a)
+        props.setCurrentUser(a)
     }
 
     const handleImageSelected = (event) => {
@@ -31,6 +36,8 @@ function ProfilePic(props){
                 console.log("Upload success");
                 console.dir(response);
                 props.setProfileURL(response.url)
+                props.changeInput(event)
+
 
             });
         }
@@ -46,7 +53,7 @@ function ProfilePic(props){
                 <div id = "profilePicContain"> <img id = "profilePic" src ={props.profileURL} alt = "pic"/> </div>
                 <div>
                     <label htmlFor="file-upload" id= "addImg_button" className="custom-file-upload">Choose new Image</label>
-                    <input id="file-upload" type="file"  onChange={handleImageSelected}/>
+                    <input id="file-upload" name={"profile_url"} type="file"  onChange={handleImageSelected}/>
                 </div>
                 <div> <button type = "button" id = "rmvImg_button" onClick={rmvImage}> Remove image </button> </div>
             </div>

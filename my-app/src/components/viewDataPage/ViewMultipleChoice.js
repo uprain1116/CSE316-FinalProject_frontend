@@ -4,20 +4,24 @@ import {Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis} from "recharts";
 
 
 function ViewMultipleChoice({question}){
-    let sortedResponses= question.response.sort((firstItem, secondItem) => firstItem.date - secondItem.date)
-    let responses= sortedResponses.map((response) => {
-        return response.data;
-    })
-
-    const counts = {};
-
-    for (const response of responses) {
-        counts[response] = counts[response] ? counts[response] + 1 : 1;
+    const counts = { };
+    for (let choice of question.choices){
+        counts[choice]=0;
     }
-    let data = Object.entries(counts).map(([key, value]) => ({name:key, val: value}))
+    question.response.map((resp)=>{
+        if(resp.data=='1'){
+            counts[question.choices[0]]+=1
+        }
+        else if (resp.data=='2'){
+            counts[question.choices[1]]+=1
+        }
+        else if (resp.data=='3'){
+            counts[question.choices[2]]+=1
+        }
+    })
+    console.log(counts)
+     let data = Object.entries(counts).map(([key, value]) => ({name:key, val: value}))
 
-    // const data = [{name:'True',val:True},
-    //     {name:'False',val:False}];
 
     return(
         <>

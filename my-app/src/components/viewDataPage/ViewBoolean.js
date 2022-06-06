@@ -10,11 +10,11 @@ function ViewBoolean({question}){
     let True=0;
     let False=0;
     let responses= question.response.map((response) => {
-        if (response.data===true){
-            True+=1;
+        if (response.data==0){
+            False+=1
         }
         else {
-            False+=1
+            True+=1
         }
     })
 

@@ -41,7 +41,7 @@ function App() {
           <>
             <Route path = '/logData' element = {<> <Banner userid = {userID} /> <LogData userid = {userID}/> </>}> </Route>
             <Route path = '/editQ' element = {<> <Banner userid = {userID}/> <EditQuestion userid = {userID}/> </>}> </Route>
-            <Route path = '/viewData' element = {<> <Banner userid = {userID}/> <ViewData/> </>}> </Route>
+            <Route path = '/viewData' element = {<> <Banner userid = {userID}/> <ViewData userid = {userID}/> </>}> </Route>
             <Route path = '/profile' element = {<> <Banner userid = {userID}/> <Profile userid = {userID}/> </>}> </Route>
             <Route path = '/admin' element = {<> <Banner userid = {userID}/> <Admin userid = {userID}/> </>}> </Route> 
           </>

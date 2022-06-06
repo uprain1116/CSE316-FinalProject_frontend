@@ -16,6 +16,7 @@ function Profile(props){
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
+        console.log(currentUser)
         event.preventDefault();
         updateUserAPIMethod(props.userid, currentUser).then((response) => {
             console.log('updated user');
@@ -32,14 +33,26 @@ function Profile(props){
 
         if(name === 'address1' || name === 'address2') {
             const updateAddress = {...currentUser['address'], [name]: value};
-            const updatedUser = {...currentUser, ['address']: updateAddress};
+            const updatedUser = {...currentUser, ['address']: updateAddress,['profile_url']:profileURL};
             setCurrentUser(updatedUser);
+            console.log(updatedUser)
+        }
+        else if(event.target.name=="profile_url"){
+            console.log(profileURL)
+            console.log("here inside profile_url change")
+            const updatedUser = {...currentUser,  ['profile_url']:profileURL};
+            setCurrentUser(updatedUser);
+            console.log(updatedUser)
         }
         else {
-            const updatedUser = {...currentUser, [name]: value};
+
+            const updatedUser = {...currentUser, [name]: value, ['profile_url']:profileURL};
+
             setCurrentUser(updatedUser);
         }
     }
+
+    useEffect(()=>{console.log(profileURL)},[profileURL])
 
     const clickLogOut = (event) => {
         event.preventDefault();
@@ -56,6 +69,8 @@ function Profile(props){
         if(props.userid !== '' && props.userid  !== undefined){
             getUserAPIMethod(props.userid).then((user) => {
                 setCurrentUser(user.userInfo);
+                console.log(user.userInfo)
+                setProfileURL(user.userInfo.profile_url);
             })
         }
     }, [props.userid]);
@@ -73,7 +88,9 @@ function Profile(props){
                 <div id = "profileTitle"> Edit Profile </div>
                     <form onSubmit={handleSubmit}>
                         <ProfilePic setProfileURL={setProfileURL}
-                        profileURL={profileURL}/>
+                        profileURL={profileURL}
+                                   changeInput={changeInput}
+                        currentUser={{currentUser}}/>
                         <ProfileName name = {currentUser.name} changeInput = {changeInput}/>
                         <ProfileEmail email = {currentUser.email} changeInput = {changeInput}/>
                         <ProfileAddress address = {currentUser.address} changeInput = {changeInput}/>

@@ -39,10 +39,10 @@ function DisplayContent(props){
         const savelog = {...findLog, responses: [...findLog.responses, {...findLog.responses, date: selectedDate, answer: todayAns}]};
         console.log('here', savelog);
 
-        // updateLogAPIMethod(savelog).then((result) => {
-        //     console.log(result);
-        //     setSubmit(true);
-        // })
+        updateLogAPIMethod(savelog).then((result) => {
+            console.log(result);
+            setSubmit(true);
+        })
     }
 
     const formateDate = (date) => {
