@@ -16,7 +16,7 @@ function ViewNumber({question}){
             <div id="view-number" >
             <h2 className={"display-question"}>{question.questionInput}</h2>
 
-        <div style={{ marginTop:"20px", width:"100%", height:500}}>
+        <div style={{overflow:"scroll", marginTop:"20px", width:"100%", height:500}}>
             <ResponsiveContainer width="99%">
             <LineChart
                 width={400}
