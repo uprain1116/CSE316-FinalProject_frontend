@@ -95,11 +95,11 @@ function EditQuestion(props){
 
 
         let newList=questionsList.filter((ques) => ques.id !=e.target.id)
-        console.log(e.target.id)
+        //console.log(e.target.id)
 
         //
         //
-        console.log(newList)
+        //console.log(newList)
         setQuestionsList(newList)
 
     }
