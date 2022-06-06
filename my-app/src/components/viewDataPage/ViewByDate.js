@@ -10,9 +10,27 @@ import ViewBoolean from "./ViewBoolean";
 function ViewByDate({questions}){
     let objectByDate={}
     for (const question of questions) {
+        console.log(question)
         // counts[response] = counts[response] ? counts[response] + 1 : 1;
         for (const resp of question.response){
-            let newQuestion= {inputType:question.inputType, questionInput:question.questionInput, data:resp.data, choices:question.choices }
+            let newQuestion;
+            if (question.inputType=="multiple-choice"){
+                let answ_mult;
+                if (resp.data=="1"){
+                    answ_mult=question.choices[0]
+                }
+                else if(resp.data=="2"){
+                    answ_mult=question.choices[1]
+                }
+                else{
+                    answ_mult= question.choices[2]
+                }
+                newQuestion= {inputType:question.inputType, questionInput:question.questionInput, data:answ_mult, choices:question.choices }
+            }
+            else{
+
+             newQuestion= {inputType:question.inputType, questionInput:question.questionInput, data:resp.data, choices:question.choices }
+            }
         if (objectByDate[resp.date]){
             objectByDate[resp.date].push(newQuestion)
         }
@@ -35,12 +53,13 @@ function ViewByDate({questions}){
         }
     }
     console.log(count)
+    let currentDate= new Date(data[count].date)
 
     return(
         <>
             <div id="view-by-date">
 
-               <div className={"date-changer"}><button onClick={handlePrevClick}>{count!==0 &&  "<"} </button><span>{data[count].date}</span> <button onClick={handleNextClick}>{count !==data.length-1 && ">"} </button></div>
+               <div className={"date-changer"}><button onClick={handlePrevClick}>{count!==0 &&  "<"} </button><span>{ new Date(data[count].date).toLocaleDateString()}</span> <button onClick={handleNextClick}>{count !==data.length-1 && ">"} </button></div>
                 {data[count].responses.map((response)=>{
                     switch (response.inputType) {
                         case "text": return (
@@ -52,6 +71,7 @@ function ViewByDate({questions}){
                         case "number": return (
                             <div className={"each-response"}>
                                 <h3>{response.questionInput}</h3>
+
                                 <input type="text" value={response.data} className={"input-instance"}disabled/>
                             </div>
                         )

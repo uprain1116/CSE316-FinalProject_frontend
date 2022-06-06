@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { RenderIf } from "../RenderIf";
 import { useNavigate } from "react-router-dom";
 import { logoutUserAPIMethod, getUserAPIMethod, updateUserAPIMethod } from "../../api/client";
+
 function Profile(props){
 
     const [windowSize, setWindowSize] = useState(0);
@@ -52,7 +53,13 @@ function Profile(props){
         }
     }
 
-    useEffect(()=>{console.log(profileURL)},[profileURL])
+    useEffect(()=> {
+        console.log(profileURL)
+        console.log("here inside profile_url change")
+        const updatedUser = {...currentUser,  ['profile_url']:profileURL};
+        setCurrentUser(updatedUser);
+        console.log(updatedUser)
+    },[profileURL])
 
     const clickLogOut = (event) => {
         event.preventDefault();
@@ -87,10 +94,9 @@ function Profile(props){
             <div id = "profileFormContainer">
                 <div id = "profileTitle"> Edit Profile </div>
                     <form onSubmit={handleSubmit}>
-                        <ProfilePic setProfileURL={setProfileURL}
-                        profileURL={profileURL}
-                                   changeInput={changeInput}
-                        currentUser={{currentUser}}/>
+                        <ProfilePic changeInput={changeInput}
+                        profile_url={currentUser.profile_url}
+                        setProfileURL={setProfileURL}/>
                         <ProfileName name = {currentUser.name} changeInput = {changeInput}/>
                         <ProfileEmail email = {currentUser.email} changeInput = {changeInput}/>
                         <ProfileAddress address = {currentUser.address} changeInput = {changeInput}/>

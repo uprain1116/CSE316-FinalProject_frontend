@@ -86,3 +86,9 @@
     font-size: 1.5rem;
 }
 
+#download-button{
+    cursor: pointer;
+    background-color: #f76b8a;
+    padding: 5px 8px;
+    border-radius: 5px;
+}

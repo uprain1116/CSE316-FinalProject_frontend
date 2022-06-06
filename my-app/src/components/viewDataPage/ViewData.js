@@ -73,6 +73,7 @@ function ViewData(props){
             "_id": "629d9eace476cf3818df34a5"
         }
     ]);
+
     const [gotData , setGotData]=useState(false);
     const [questions, setQuestions]=useState([])
 
@@ -86,7 +87,7 @@ function ViewData(props){
 
         })
         setGotData(true)
-    }, [])
+    }, [questions])
     console.log(allLogs.array)
     let handleSelectChange=(e)=>{
         setSelectValue(e.target.value)
@@ -97,39 +98,52 @@ function ViewData(props){
         }).catch((err) => {
             console.log(err);
         })
-    }, [])
+    }, [props.userid])
+
+    const exportData = () => {
+        const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
+            JSON.stringify(dummy_data)
+        )}`;
+        const link = document.createElement("a");
+        link.href = jsonString;
+        link.download = "data.json";
+
+        link.click();
+    };
 console.log(questions)
     let a=[]
 
     let dict={}
-    useEffect(()=>{
 
-    },[allLogs])
-    allLogs.map((q)=>q.answer.map((answ)=>{
-        if(dict[answ.qid]){
-            dict[answ.qid].push({ date:q.date ,data:answ.ans})
-        }
-        else{
-            dict[answ.qid]=[{ date:q.date ,data:answ.ans}]
-        }
-    }))
     let dummy_data=[]
-    let data = Object.entries(dict).map(([key, value]) => ({qid:key, responses: value}))
-    console.log(data)
-    if (questions.length>0) {
-        data.map((dataChild) => {
-                let currentQuestion = questions.find((ques) => ques.id == dataChild.qid)
 
-                dummy_data.push({
-                    id: dataChild.qid,
-                    questionInput: currentQuestion.question,
-                    inputType: currentQuestion.questionType,
-                    choices: currentQuestion.option,
-                    response: dataChild.responses
-                })
+    if( allLogs!=undefined) {
+        allLogs.map((q) => q.answer.map((answ) => {
+            if (dict[answ.qid]) {
+                dict[answ.qid].push({date: q.date, data: answ.ans})
+            } else {
+                dict[answ.qid] = [{date: q.date, data: answ.ans}]
             }
-        )
+        }))
+
+        let data = Object.entries(dict).map(([key, value]) => ({qid: key, responses: value}))
+        console.log(data)
+        if (questions.length > 0) {
+            data.map((dataChild) => {
+                    let currentQuestion = questions.find((ques) => ques.id == dataChild.qid)
+                if(currentQuestion!=undefined){
+                    dummy_data.push({
+                        id: dataChild.qid,
+                        questionInput: currentQuestion.question,
+                        inputType: currentQuestion.questionType,
+                        choices: currentQuestion.option,
+                        response: dataChild.responses
+                    })}
+                }
+            )
+        }
     }
+
     console.log(dummy_data)
 
 
@@ -144,7 +158,7 @@ console.log(questions)
                 <div className="view-data-header">
                     <div className="header-top">
                     <section>{allLogs.length} responses</section>
-                    <section>Download</section>
+                    <section onClick={exportData} id={"download-button"}>Download JSON</section>
                     </div>
                     <div className="header-tabs">
                     <div className="question-tab">

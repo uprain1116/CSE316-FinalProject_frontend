@@ -9,8 +9,9 @@ import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Resp
 function ViewBoolean({question}){
     let True=0;
     let False=0;
+    console.log(question.response)
     let responses= question.response.map((response) => {
-        if (response.data==0){
+        if (response.data=='false'){
             False+=1
         }
         else {
