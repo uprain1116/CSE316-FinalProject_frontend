@@ -79,7 +79,7 @@ function ViewData(props){
 
     useEffect(() => {
         getLogData().then((logs) => {
-            console.log(logs[0].responses)
+           // console.log(logs[0].responses)
             if(logs[0].responses.length === 0) setAllLogs(logs[0].responses);
             else {
                 setAllLogs(logs[0].responses);
@@ -88,7 +88,7 @@ function ViewData(props){
         })
         setGotData(true)
     }, [questions])
-    console.log(allLogs.array)
+    //console.log(allLogs.array)
     let handleSelectChange=(e)=>{
         setSelectValue(e.target.value)
     }
@@ -110,7 +110,7 @@ function ViewData(props){
 
         link.click();
     };
-console.log(questions)
+
     let a=[]
 
     let dict={}
@@ -127,7 +127,7 @@ console.log(questions)
         }))
 
         let data = Object.entries(dict).map(([key, value]) => ({qid: key, responses: value}))
-        console.log(data)
+       // console.log(data)
         if (questions.length > 0) {
             data.map((dataChild) => {
                     let currentQuestion = questions.find((ques) => ques.id == dataChild.qid)
@@ -144,7 +144,7 @@ console.log(questions)
         }
     }
 
-    console.log(dummy_data)
+    //console.log(dummy_data)
 
 
     let dummy_data1= [{id:123 ,questionInput:"How are you today? ", inputType:"text",choices:["okay day","Bad day","Great day"], response:[{data:"Today I am hopeful", date:20210331},{data:"Today I am hopeful", date:20210301},{data:"Today I am happy", date:20210303},{data:"Today I am cheerful", date:20210302},] },
@@ -153,12 +153,13 @@ console.log(questions)
         {id:101 ,questionInput:"Did you workout today? ", inputType:"boolean",choices:["okay day","Bad day","Great day"], response:[{data:false, date:20210331},{data:true, date:20210301},{data:true, date:20210303},{data:true, date:20210302}]}]
     return(
         <>
+            {dummy_data.length<1 && <div style={{textAlign:"center"}}>Loading...</div> }
             {dummy_data.length>0&&
             <div className="view-data-page">
                 <div className="view-data-header">
                     <div className="header-top">
                     <section>{allLogs.length} responses</section>
-                    <section onClick={exportData} id={"download-button"}>Download JSON</section>
+                    <section onClick={exportData} ><span>.JSON</span> <span id={"download-button"} className="material-icons" > file_download </span></section>
                     </div>
                     <div className="header-tabs">
                     <div className="question-tab">

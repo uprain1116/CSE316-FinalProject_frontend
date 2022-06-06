@@ -21,7 +21,7 @@ function EditQuestion(props){
                 setCurrentUser(user)
                 setQuestionsList(user.questions);
                 setIsLoading(false);
-                console.log(user.questions)
+                //console.log(user.questions)
             })
         }
     }, [props.userid]);
@@ -36,8 +36,8 @@ function EditQuestion(props){
     let handleSelectChange=(e)=>{
         let selectedId= e.target.name
         let currentQuestion= questionsList.find((ques) => ques.id ==selectedId)
-        console.log(e.target.value)
-        console.log(currentQuestion)
+        //console.log(e.target.value)
+        //console.log(currentQuestion)
         let updatedQuestion= {
 
             id: currentQuestion.id,
@@ -53,14 +53,14 @@ function EditQuestion(props){
             return ques;
         })
         setQuestionsList(updatedArray);
-        console.log(updatedArray)
+        //console.log(updatedArray)
 
         }
 
 
     let handleInputChange=(e)=>{
         let currentQuestionId= e.target.id
-        console.log(questionsList)
+        //console.log(questionsList)
         let currentQuestion= questionsList.find((ques) => ques.id == currentQuestionId)
 
         let updatedQuestion= {
@@ -94,11 +94,12 @@ function EditQuestion(props){
 
 
 
-        let newList=questionsList.filter((ques) => ques.id !=e.target.value)
+        let newList=questionsList.filter((ques) => ques.id !=e.target.id)
+        console.log(e.target.id)
 
         //
         //
-        //console.log(newList)
+        console.log(newList)
         setQuestionsList(newList)
 
     }
@@ -106,7 +107,7 @@ function EditQuestion(props){
     let handleOptionChange=(e)=>{
         let selectedId= e.target.name
         let currentQuestion= questionsList.find((ques) => ques.id == selectedId)
-        console.log(currentQuestion)
+        //console.log(currentQuestion)
         let updatedOptions;
         switch(e.target.id){
             case "first-option":
@@ -120,7 +121,7 @@ function EditQuestion(props){
                 break
         }
 
-        console.log(updatedOptions)
+        //console.log(updatedOptions)
         let updatedQuestion= {
             id: currentQuestion.id,
             question: currentQuestion.question,
@@ -136,7 +137,7 @@ function EditQuestion(props){
 
             return ques;
         })
-        console.log(updatedArray)
+        //console.log(updatedArray)
         setQuestionsList(updatedArray);
     }
     // let handleChoice2Change=(e)=>{
@@ -188,7 +189,7 @@ function EditQuestion(props){
 
         let user={id: props.userid,userInfo:currentUser.userInfo, questions:questionsList }
         updateUserQAPIMethod(user).then((response) => {
-           console.log(response)
+           //console.log(response)
         })
     }
 
@@ -196,11 +197,11 @@ function EditQuestion(props){
 
     return(
         <>
-            {isLoading &&<div>Loading...</div> }
+            {isLoading &&<div style={{textAlign:"center"}}>Loading...</div> }
             {!isLoading &&  <div className="edit-page">
             <div className={"edit-header"}>
                 <div className={"edit-title"}>Edit Questions</div>
-                <button onClick={handleAddClick}>+</button>
+                <button  className={"edit-add-button"} onClick={handleAddClick}><span className="material-icons" > add_circle_outline </span></button>
             </div>
             {questionsList.map((ques)=>(
             <div className="input-instance" >
@@ -208,13 +209,13 @@ function EditQuestion(props){
                     <input id={ques.id} type="text" className={"edit-input"} onChange={handleInputChange} value={ques.question}/>
                     <div className="select-and-delete">
                     <select name={ques.id} id="question-types" onChange={handleSelectChange} value={ques.questionType}>
-                        <option value="number">number</option>s
+                        <option value="number">number</option>
                         <option value="boolean">boolean</option>
                         <option value="text">text</option>
                         <option value="multiple-choice">multiple choice</option>
 
                     </select>
-                        <button className="edit-delete-button" value={ques.id} onClick={handleDeleteClick}>delete </button>
+                        <button className="edit-delete-button" name={ques.id} onClick={handleDeleteClick} ><span  className={"material-icons"} id={ques.id} > delete_outline </span> </button>
 
                     </div>
 

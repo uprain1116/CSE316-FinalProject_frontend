@@ -55,7 +55,7 @@ function ProfilePic(props){
             <div className="profileContentTitle">Profile photo</div>
             <div id = "profileMainContainer">
                 <div id = "profilePicContain"> <img id = "profilePic" src ={props.profile_url} alt = "pic"/> </div>
-                <div>
+                <div id={"file-upload-container"}>
                     <label htmlFor="file-upload" id= "addImg_button" className="custom-file-upload">Choose new Image</label>
                     <input id="file-upload" name={"profile_url"} type="file"  onChange={handleImageSelected}/>
                 </div>

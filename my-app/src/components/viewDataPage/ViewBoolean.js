@@ -9,7 +9,7 @@ import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Resp
 function ViewBoolean({question}){
     let True=0;
     let False=0;
-    console.log(question.response)
+    //console.log(question.response)
     let responses= question.response.map((response) => {
         if (response.data=='false'){
             False+=1
@@ -26,9 +26,11 @@ function ViewBoolean({question}){
 
     return(
         <>
-            <div id="view-boolean">
-        <h3>{question.questionInput}</h3>
-            <BarChart width={500} height={400} data={data}>
+            <div id="view-boolean" >
+        <h2 className={"display-question"}>{question.questionInput}</h2>
+                <div style={{overflow:"hidden", marginTop:"20px", width:"99%", height:500}}>
+                    <ResponsiveContainer width="99%">
+            <BarChart width={400} height={400} data={data}>
                 <Bar dataKey="val" fill="#8884d8" />
                 <CartesianGrid stroke="#ccc" />
 
@@ -36,6 +38,8 @@ function ViewBoolean({question}){
                 <Tooltip/>
                 <YAxis />
             </BarChart>
+                    </ResponsiveContainer>
+                </div>
             </div>
         </>
 

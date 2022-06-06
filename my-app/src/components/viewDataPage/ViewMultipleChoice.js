@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import "./ViewData.css"
-import {Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis} from "recharts";
+import {Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 
 
 function ViewMultipleChoice({question}){
@@ -19,21 +19,25 @@ function ViewMultipleChoice({question}){
             counts[question.choices[2]]+=1
         }
     })
-    console.log(counts)
+    //console.log(counts)
      let data = Object.entries(counts).map(([key, value]) => ({name:key, val: value}))
 
 
     return(
         <>
-            <div id="view-multipleChoice">
-            <h3>{question.questionInput}</h3>
-            <BarChart width={500} height={400} data={data}>
+            <div id="view-multipleChoice" >
+            <h2 className={"display-question"}>{question.questionInput}</h2>
+                <div style={{overflow:"hidden", marginTop:"20px", width:"99%", aspectRatio:"3", height:500}}>
+                    <ResponsiveContainer width="99%" >
+            <BarChart width={400} height={400} data={data}>
                 <Bar dataKey="val" fill="#8884d8" />
                 <CartesianGrid stroke="#ccc" />
                 <Tooltip/>
                 <XAxis dataKey="name" />
                 <YAxis />
             </BarChart>
+                    </ResponsiveContainer>
+                </div>
             </div>
         </>
 

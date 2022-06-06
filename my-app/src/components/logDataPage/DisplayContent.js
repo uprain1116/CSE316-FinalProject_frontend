@@ -14,10 +14,11 @@ function DisplayContent(props){
     const [todayAns, setTodayAns] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [submit, setSubmit] = useState(false);
+    const   [loading, setLoading]=useState(true);
 
 
     const changeInput = (event, qid, type) => {
-        console.log('change');
+
 
         if(todayAns.length === 0){
             const updateAns = [{qid: qid, questionType: type, ans: event.target.value}];
@@ -37,7 +38,7 @@ function DisplayContent(props){
         const findLog = {...allLogs, responses: allLogs.responses.filter((logbyDate) => formateDate(new Date(logbyDate.date)) !== formateDate(selectedDate))};
 
         const savelog = {...findLog, responses: [...findLog.responses, {...findLog.responses, date: selectedDate, answer: todayAns}]};
-        console.log('here', savelog);
+        // console.log('here', savelog);
 
         updateLogAPIMethod(savelog).then((result) => {
             console.log(result);
@@ -64,6 +65,7 @@ function DisplayContent(props){
     useEffect(() => {
         getUserAPIMethod(props.userid).then((user) => {
             setQuestions(user.questions);
+            setLoading(false);
         }).catch((err) => {
             console.log(err);
         })
@@ -90,7 +92,8 @@ function DisplayContent(props){
     
     return(
          <>
-             <div id = "logdatacontent">
+             {loading && <div style={{textAlign:"center"}}>Loading...</div> }
+             {!loading&&  <div id = "logdatacontent">
                 <DateOption nextDay = {nextDay} previousDay = {previousDay} selectedDate = {formateDate(selectedDate)}/>
                 <form onSubmit={handleSubmit}>
                     {questions.map((quest) => (
@@ -114,7 +117,7 @@ function DisplayContent(props){
                         <button type = "submit" id = "savelogData">Submit</button>
                     </div>
                 </form>
-            </div>
+            </div>}
         </>
     );
 }

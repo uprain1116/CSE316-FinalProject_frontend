@@ -10,9 +10,9 @@ function ViewText({question}){
 
 
     return(
-        <div id={"view-text"}>
+        <div id={"view-text"} >
 
-            <h3>{question.questionInput}</h3>
+            <h2>{question.questionInput}</h2>
             <div className="all-responses">
             {responses.map((response)=>
                 <>

@@ -17,7 +17,7 @@ function Profile(props){
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
-        console.log(currentUser)
+       // console.log(currentUser)
         event.preventDefault();
         updateUserAPIMethod(props.userid, currentUser).then((response) => {
             console.log('updated user');
@@ -36,14 +36,14 @@ function Profile(props){
             const updateAddress = {...currentUser['address'], [name]: value};
             const updatedUser = {...currentUser, ['address']: updateAddress,['profile_url']:profileURL};
             setCurrentUser(updatedUser);
-            console.log(updatedUser)
+            //console.log(updatedUser)
         }
         else if(event.target.name=="profile_url"){
-            console.log(profileURL)
-            console.log("here inside profile_url change")
+           // console.log(profileURL)
+            //console.log("here inside profile_url change")
             const updatedUser = {...currentUser,  ['profile_url']:profileURL};
             setCurrentUser(updatedUser);
-            console.log(updatedUser)
+            //console.log(updatedUser)
         }
         else {
 
@@ -54,11 +54,11 @@ function Profile(props){
     }
 
     useEffect(()=> {
-        console.log(profileURL)
-        console.log("here inside profile_url change")
+        //console.log(profileURL)
+        //console.log("here inside profile_url change")
         const updatedUser = {...currentUser,  ['profile_url']:profileURL};
         setCurrentUser(updatedUser);
-        console.log(updatedUser)
+        //console.log(updatedUser)
     },[profileURL])
 
     const clickLogOut = (event) => {
@@ -76,7 +76,7 @@ function Profile(props){
         if(props.userid !== '' && props.userid  !== undefined){
             getUserAPIMethod(props.userid).then((user) => {
                 setCurrentUser(user.userInfo);
-                console.log(user.userInfo)
+                //console.log(user.userInfo)
                 setProfileURL(user.userInfo.profile_url);
             })
         }
