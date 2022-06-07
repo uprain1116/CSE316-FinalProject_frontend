@@ -55,7 +55,7 @@ export const createUserAPIMethod = (user) => {
         method: 'POST', // The method defaults to GET
         body: JSON.stringify(user),
     })
-    // .then(checkStatus)
+    .then(checkStatus)
         .then(parseJSON);
 }
 

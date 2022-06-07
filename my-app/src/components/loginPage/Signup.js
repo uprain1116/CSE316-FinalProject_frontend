@@ -25,6 +25,9 @@ function Signup(props){
         if(newUser.name === undefined || newUser.name === ''){ setErr('Error: Name required'); return; }
         else if(newUser.email === undefined || newUser.email === ''){ setErr('Error: Email required'); return; }
         else if(newUser.password === undefined || newUser.password === ''){ setErr('Error: Password required'); return;}
+        else if ((!/[a-z]/.test(newUser.password))) { setErr('Error: password needs at least one lowercase'); return; }
+        else if ((!/[A-Z]/.test(newUser.password))) { setErr('Error: password needs at least one uppercase'); return; }
+        else if ((!/[0-9]/.test(newUser.password))) { setErr('Error: password needs at least one number'); return; }
 
         let finalUser = {
             userInfo: {
@@ -60,9 +63,9 @@ function Signup(props){
             }).catch((err) => { });
 
         }).catch((err) => {
-            console.log(err);
+            if(err.status === undefined) {setErr('Error: duplicated email or uncorrect password format '); return;}
             let error = err.status.split(' ');
-            console.log(error[5]);
+
             if(error[0] === "E11000") setErr('Error: Email already exists');
             else if(error[error.length -1] === '(8).')  setErr('Error: Password must be over length 8');
             else if(error[error.length -1] === 'email') {
