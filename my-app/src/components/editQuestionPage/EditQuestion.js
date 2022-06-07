@@ -201,7 +201,7 @@ function EditQuestion(props){
             {!isLoading &&  <div className="edit-page">
             <div className={"edit-header"}>
                 <div className={"edit-title"}>Edit Questions</div>
-                <button  className={"edit-add-button"} onClick={handleAddClick}><span className="material-icons" > add_circle_outline </span></button>
+                <button  className={"edit-add-button"} data-testid="add-question" onClick={handleAddClick}><span className="material-icons" > add_circle_outline </span></button>
             </div>
             {questionsList.map((ques)=>(
             <div className="input-instance" >

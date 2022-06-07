@@ -36,7 +36,7 @@ function Banner(props){
             </RenderifBigSIze>
 
             
-            <div id = "menu">
+            <div id = "menu" data-testid="banner">
                 <span className = "menu_option" onClick={() => navigate('/logdata')}> Log day </span>
                 <span className = "menu_option" onClick={() => navigate('/editQ')}> Edit Question </span>
                 <span className = "menu_option" onClick={() => navigate('/viewData')}> View Data </span>
