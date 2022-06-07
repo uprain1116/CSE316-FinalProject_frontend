@@ -29,7 +29,7 @@ function AdminTable(props){
                             <td className="td"> {userP.userInfo.name} </td>
                             <td className="td"> {userP.userInfo.email} </td>
                             <td className="td"> {userP.questions.length} </td>
-                            <td className="td"> {userP.userLogs} </td>
+                            <td className="td"> {userP.userLogs === undefined ? 0 : userP.userLogs} </td>
                             <td className="td"> <span className="material-icons" id = {userP._id} onClick={deleteUser}> delete_outline </span> </td>
                         </tr>
             ))}

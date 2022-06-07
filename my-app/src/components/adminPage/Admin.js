@@ -35,7 +35,7 @@ function Admin(props){
             });
             setUserLogs(newGetUser);
         })
-    }, [userLogs]);
+    }, []);
 
 
     return(
