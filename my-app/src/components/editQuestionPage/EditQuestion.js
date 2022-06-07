@@ -235,6 +235,10 @@ function EditQuestion(props){
             {questionsList.length>0 &&
                 <button type={"submit"} id={"edit-submit-button"} onClick={handleEditSubmit}>Save</button>
             }
+                {questionsList.length<1 &&
+                   <h3 style={{textAlign:"right", color:"red"}}>Press this button to add questions <span
+                       className="material-icons blue-color"> arrow_upward</span></h3>
+                }
         </div>}
 
         </>

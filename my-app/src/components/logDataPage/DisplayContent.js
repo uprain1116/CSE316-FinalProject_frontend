@@ -114,7 +114,9 @@ function DisplayContent(props){
                         </div>
                     ))}
                     <div>
-                        <button type = "submit" id = "savelogData">Submit</button>
+                        {  questions.length>0 &&    <button type = "submit" id = "savelogData">Submit</button>}
+                        {  questions.length<1 &&   <h3 style={{textAlign:"center" , color:"red"}}>Please input some questions through edit questions page..</h3>  }
+
                     </div>
                 </form>
             </div>}
