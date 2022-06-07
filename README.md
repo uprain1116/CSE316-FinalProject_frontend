@@ -11,9 +11,15 @@ In the same folder you then can use `npm start` to start the server that runs th
 ### additional information
 We have hosted the project online on ***Netlify***.\
 Please visit the following website: https://abhishek-sangwoo-316.netlify.app/ \
+
+Below are information about a user account with at least 20 responses.\
+account email: user@email.com\
+password: helloUser123
+
+
 Below are information about the admin account.\
-account email:\
-password:
+account email: adminuser@mail.com \
+password: helloAdmin123
 
 
 
