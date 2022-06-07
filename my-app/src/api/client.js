@@ -6,14 +6,14 @@ const defaultHeaders = {
 
 //get User Infomation
 export const getAllUserAPIMethod = () => {
-    return fetch(`https://abhishek-sangwoo-316.herokuapp.com/api/users`, {
+    return fetch(`/api/users`, {
         ...defaultHeaders,
     }).then(checkStatus)
         .then(parseJSON);
 }
 
 export const getUserAPIMethod = (userID) => {
-    return fetch(`https://abhishek-sangwoo-316.herokuapp.com/api/users/${userID}`, {
+    return fetch(`/api/users/${userID}`, {
         ...defaultHeaders,
     }).then(checkStatus)
         .then(parseJSON);
@@ -21,7 +21,7 @@ export const getUserAPIMethod = (userID) => {
 
 //update User Infomation
 export const updateUserAPIMethod = (userId, user) => {
-    return fetch(`https://abhishek-sangwoo-316.herokuapp.com/api/users/${userId}`, {
+    return fetch(`/api/users/${userId}`, {
         ...defaultHeaders,
         method: 'PUT', // The method defaults to GET
         body: JSON.stringify(user),
@@ -31,7 +31,7 @@ export const updateUserAPIMethod = (userId, user) => {
 
 //update User Question
 export const updateUserQAPIMethod = (user) => {
-    return fetch(`https://abhishek-sangwoo-316.herokuapp.com/api/userQ/${user.id}`, {
+    return fetch(`/api/userQ/${user.id}`, {
         ...defaultHeaders,
         method: 'PUT', // The method defaults to GET
         body: JSON.stringify(user),
@@ -41,7 +41,7 @@ export const updateUserQAPIMethod = (user) => {
 
 //delete user
 export const deleteUserAPIMethod = (userID) => {
-    return fetch(`https://abhishek-sangwoo-316.herokuapp.com/api/users/${userID}`, {
+    return fetch(`/api/users/${userID}`, {
         ...defaultHeaders,
         method: 'DELETE', // The method defaults to GET
     }).then(checkStatus)
@@ -50,7 +50,7 @@ export const deleteUserAPIMethod = (userID) => {
 
 //signup for a new account
 export const createUserAPIMethod = (user) => {
-    return fetch(`https://abhishek-sangwoo-316.herokuapp.com/api/register`, {
+    return fetch(`/api/register`, {
         ...defaultHeaders,
         method: 'POST', // The method defaults to GET
         body: JSON.stringify(user),
@@ -61,7 +61,7 @@ export const createUserAPIMethod = (user) => {
 
 //login
 export const loginUserAPIMethod = (user) => {
-    return fetch(`https://abhishek-sangwoo-316.herokuapp.com/api/login`, {
+    return fetch(`/api/login`, {
         ...defaultHeaders,
         method: 'POST', // The method defaults to GET
         body: JSON.stringify(user),
@@ -72,7 +72,7 @@ export const loginUserAPIMethod = (user) => {
 
 //logOut
 export const logoutUserAPIMethod = () => {
-    return fetch(`https://abhishek-sangwoo-316.herokuapp.com/api/logout`, {
+    return fetch(`/api/logout`, {
         ...defaultHeaders,
         method: 'POST', // The method defaults to GET
     }).then(checkStatus)
@@ -80,7 +80,7 @@ export const logoutUserAPIMethod = () => {
 }
 
 export const getSessionAPIMethod = () => {
-    return fetch(`https://abhishek-sangwoo-316.herokuapp.com/api/getcurrentsession`, {
+    return fetch(`/api/getcurrentsession`, {
         ...defaultHeaders,
         method: 'POST', // The method defaults to GET
     }).then(checkStatus)
@@ -91,14 +91,14 @@ export const getSessionAPIMethod = () => {
 
 
 export const getLogData = () => {
-    return fetch(`https://abhishek-sangwoo-316.herokuapp.com/api/logs`, {
+    return fetch(`/api/logs`, {
         ...defaultHeaders,
     }).then(checkStatus)
         .then(parseJSON);
 }
 
 export const getLogDataById = (userID) => {
-    return fetch(`https://abhishek-sangwoo-316.herokuapp.com/api/logs/${userID}`, {
+    return fetch(`/api/logs/${userID}`, {
         ...defaultHeaders,
     }).then(checkStatus)
         .then(parseJSON);
@@ -106,7 +106,7 @@ export const getLogDataById = (userID) => {
 
 
 export const createLogAPIMethod = (log) => {
-    return fetch(`https://abhishek-sangwoo-316.herokuapp.com/api/createLog`, {
+    return fetch(`/api/createLog`, {
         ...defaultHeaders,
         method: 'POST', // The method defaults to GET
         body: JSON.stringify(log),
@@ -118,7 +118,7 @@ export const createLogAPIMethod = (log) => {
 //update Log
 export const updateLogAPIMethod = (user) => {
     console.log(user._id);
-    return fetch(`https://abhishek-sangwoo-316.herokuapp.com/api/log/${user._id}`, {
+    return fetch(`/api/log/${user._id}`, {
         ...defaultHeaders,
         method: 'PUT', // The method defaults to GET
         body: JSON.stringify(user),
