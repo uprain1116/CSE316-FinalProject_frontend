@@ -5,7 +5,7 @@ import TrueFalse from "./TrueFalse";
 import Text from "./Text";
 import Multiple from "./Multiple";
 import {useEffect, useState} from "react"
-import { getUserAPIMethod, getLogData, updateLogAPIMethod } from "../../api/client";
+import {getUserAPIMethod, getLogData, updateLogAPIMethod, getLogDataById} from "../../api/client";
 import { RenderIf } from "../RenderIf";
 
 function DisplayContent(props){
@@ -72,7 +72,7 @@ function DisplayContent(props){
     }, [])
 
     useEffect(() => {
-        getLogData().then((logs) => {
+        getLogDataById(props.userid).then((logs) => {
             if(logs[0].responses.length === 0) setAlllogs(logs[0]);
             else {
                 setAlllogs(logs[0]);

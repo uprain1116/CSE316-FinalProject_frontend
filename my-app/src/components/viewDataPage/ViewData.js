@@ -78,7 +78,7 @@ function ViewData(props){
     const [questions, setQuestions]=useState([])
 
     useEffect(() => {
-        getLogData().then((logs) => {
+        getLogDataById(props.userid).then((logs) => {
            // console.log(logs[0].responses)
             if(logs[0].responses.length === 0) setAllLogs(logs[0].responses);
             else {
