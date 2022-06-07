@@ -9,9 +9,10 @@ In the same folder you then can use `npm start` to start the server that runs th
 
 
 ### additional information
-We have hosted the project online. Please visit the following website:
-Below are information about the admin account.
-account email:
+We have hosted the project online on ***Netlify***.\
+Please visit the following website: https://abhishek-sangwoo-316.netlify.app/ \
+Below are information about the admin account.\
+account email:\
 password:
 
 
@@ -36,3 +37,6 @@ Install the dependencies in the local node_modules folder.
 In global mode (ie, with -g or --global appended to the command), it installs the current package context (ie, the current working directory) as a global package.
 
 By default, npm install will install all modules listed as dependencies in package.json.
+
+##### `npm run test`
+This command will run the automated tests.
