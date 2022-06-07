@@ -25,7 +25,7 @@ function LoginForm(props){
                 <div>
                     <label htmlFor = "login_Email"> <b>Email</b> </label>
                 </div>
-                <input id = "login_Email" type = "text" name="email" onChange = {changeInput} value={user.email || ''}/>
+                <input id = "login_Email" type = "text" name="email" onChange = {changeInput} data-testid="email-input" value={user.email || ''}/>
 
                 <div>
                     <label htmlFor = "login_Password"> <b>Password</b> </label>
